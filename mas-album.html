@@ -483,16 +483,16 @@
             };
             
             // Función para manejar el scroll
-            const handleScroll = () => {
-                albumCards.forEach((card, index) => {
-                    if (isInViewport(card) {
-                        // Aplicamos un delay progresivo para crear el efecto cascada
-                        setTimeout(() => {
-                            card.classList.add('visible');
-                        }, index * 100); // 100ms de diferencia entre cada uno
-                    }
-                });
-            };
+           const handleScroll = () => {
+            albumCards.forEach((card, index) => {
+            if (isInViewport(card)) {  // Paréntesis corregido aquí
+                // Aplicamos un delay progresivo para crear el efecto cascada
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, index * 100); // 100ms de diferencia entre cada uno
+            }
+        });
+    };
             
             // Llamamos a la función al cargar y al hacer scroll
             handleScroll();
