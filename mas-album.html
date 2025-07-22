@@ -6,6 +6,7 @@
     <title>Pasión Rockera: Más Álbumes del Rock Argentino</title>
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Staatliches&family=Permanent+Marker&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/icono.svg" type="image/svg+xml">
     <script>
         tailwind.config = {
             theme: {
@@ -152,7 +153,9 @@
                             <div class="vinyl-hole"></div>
                         </div>
                     </div>
-                    <span class="font-stencil text-xl">PASIÓN ROCKERA</span>
+                    <a href="index.html" class="hover:underline hover:text-rockRed transition-colors duration-200">
+                        <span class="font-stencil text-xl">PASIÓN ROCKERA</span>
+                    </a>
                 </div>
                 
                 <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
@@ -186,6 +189,7 @@
     
     <!-- Contenido principal -->
     <main class="relative z-10 pb-20">
+        
         <div class="container mx-auto px-4">
             <!-- Grid de álbumes -->
             <div class="album-grid">
@@ -194,7 +198,7 @@
                     <div class="relative">
                         <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
                             <a href="https://open.spotify.com/intl-es/album/5MJR9j21vjEi4ODxzhvoTA?si=bd65eabc54664002" target="_blank" rel="noopener noreferrer">
-                                <img src="./fotos/Pescado_Rabioso-Spinetta_-_Artaud.png" alt="Portada del álbum Artaud" class="w-full h-full object-cover">
+                                <img src="./assets/fotos/albumnes/PescadoRabioso-Artaud.png" alt="Portada del álbum Artaud" class="w-full h-full object-cover">
                             </a>
                         </div>
                         <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
@@ -207,101 +211,174 @@
                         <p class="text-sm italic">"Todas las hojas son del viento, hasta que caen..."</p>
                     </div>
                 </div>
-                
                 <!-- Clics Modernos -->
-                <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
-                    <div class="relative">
-                        <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
-                            <a href="https://open.spotify.com/album/5XCHJc5JNUBqVKk0qxnyZr" target="_blank" rel="noopener noreferrer">
-                                <img src="https://i.scdn.co/image/ab67616d0000b2735c9a9f0f6a1a0a0e0a1a0a0e" alt="Clics Modernos" class="w-full h-full object-cover">
-                            </a>
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <a href="https://open.spotify.com/intl-es/album/3OyBf97NOuJjhEpQHY920H?si=aadc59c64318481b" target="_blank" rel="noopener noreferrer">
+                               <img src="./assets/fotos/albumnes/Clic.jpeg"  alt="Clics Modernos" class="w-full h-full object-cover"/>
+                               </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1983
+                            </div>
                         </div>
-                        <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
-                            1983
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-stencil text-xl mb-1">CLICS MODERNOS</h3>
-                        <p class="text-sm mb-3">Charly García</p>
-                        <p class="text-sm italic">"Nos siguen pegando abajo..."</p>
-                    </div>
-                </div>
-                
-                <!-- Canción Animal -->
-                <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
-                    <div class="relative">
-                        <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
-                            <a href="https://open.spotify.com/album/3SlSmfmPiv83QIhnjVXlq" target="_blank" rel="noopener noreferrer">
-                                <img src="https://i.scdn.co/image/ab67616d0000b2735c9a9f0f6a1a0a0e0a1a0a0e" alt="Canción Animal" class="w-full h-full object-cover">
-                            </a>
-                        </div>
-                        <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
-                            1990
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">CLICS MODERNOS</h3>
+                            <p class="text-sm mb-3">Charly García</p>
+                            <p class="text-sm italic">"Nos siguen pegando abajo..."</p>
                         </div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="font-stencil text-xl mb-1">CANCIÓN ANIMAL</h3>
-                        <p class="text-sm mb-3">Soda Stereo</p>
-                        <p class="text-sm italic">"Un millón de años luz de casa..."</p>
-                    </div>
-                </div>
-                
-                <!-- Oktubre -->
-                <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
-                    <div class="relative">
-                        <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
-                            <a href="https://open.spotify.com/album/5XCHJc5JNUBqVKk0qxnyZr" target="_blank" rel="noopener noreferrer">
-                                <img src="https://i.scdn.co/image/ab67616d0000b2735c9a9f0f6a1a0a0e0a1a0a0e" alt="Oktubre" class="w-full h-full object-cover">
-                            </a>
+                    
+                    <!-- Canción Animal -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <a href="https://open.spotify.com/intl-es/album/3GoSlKTNcVOp1ZxE5OOXeN?si=0876d70ec9354049" target="_blank" rel="noopener noreferrer">
+                               <img src="./assets/fotos/albumnes/CancionAnimal.jpeg"  alt="Cancion Animal" class="w-full h-full object-cover"/>
+                               </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1990
+                            </div>
                         </div>
-                        <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
-                            1986
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-stencil text-xl mb-1">OKTUBRE</h3>
-                        <p class="text-sm mb-3">Patricio Rey y sus Redonditos de Ricota</p>
-                        <p class="text-sm italic">"Ji ji ji, se va a acabar, se va a acabar la dictadura del macho..."</p>
-                    </div>
-                </div>
-                
-                <!-- El Amor Después del Amor -->
-                <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
-                    <div class="relative">
-                        <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
-                            <a href="https://open.spotify.com/album/5XCHJc5JNUBqVKk0qxnyZr" target="_blank" rel="noopener noreferrer">
-                                <img src="https://i.scdn.co/image/ab67616d0000b2735c9a9f0f6a1a0a0e0a1a0a0e" alt="El Amor Después del Amor" class="w-full h-full object-cover">
-                            </a>
-                        </div>
-                        <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
-                            1992
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">CANCIÓN ANIMAL</h3>
+                            <p class="text-sm mb-3">Soda Stereo</p>
+                            <p class="text-sm italic">"Un millón de años luz de casa..."</p>
                         </div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="font-stencil text-xl mb-1">EL AMOR DESPUÉS DEL AMOR</h3>
-                        <p class="text-sm mb-3">Fito Páez</p>
-                        <p class="text-sm italic">"Quién dijo que todo está perdido, yo vengo a ofrecer mi corazón..."</p>
-                    </div>
-                </div>
-                
-                <!-- Bocanada -->
-                <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
-                    <div class="relative">
-                        <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
-                            <a href="https://open.spotify.com/album/5XCHJc5JNUBqVKk0qxnyZr" target="_blank" rel="noopener noreferrer">
-                                <img src="https://i.scdn.co/image/ab67616d0000b2735c9a9f0f6a1a0a0e0a1a0a0e" alt="Bocanada" class="w-full h-full object-cover">
-                            </a>
+                    
+                    <!-- Oktubre -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <a href="https://open.spotify.com/intl-es/album/0TmPRZoau8M0QIfnMgwrlI?si=aeead4b20da34929" target="_blank" rel="noopener noreferrer">
+                               <img src="./assets/fotos/albumnes/oktubre.jpeg"  alt="Oktubre" class="w-full h-full object-cover"/>
+                               </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1986
+                            </div>
                         </div>
-                        <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
-                            1999
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">OKTUBRE</h3>
+                            <p class="text-sm mb-3">Patricio Rey y sus Redonditos de Ricota</p>
+                            <p class="text-sm italic">"Ji ji ji, se va a acabar, se va a acabar la dictadura del macho..."</p>
                         </div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="font-stencil text-xl mb-1">BOCANADA</h3>
-                        <p class="text-sm mb-3">Gustavo Cerati</p>
-                        <p class="text-sm italic">"Puedo ver a través, la pared de tu piel..."</p>
+                    
+                    <!-- El Amor Después del Amor -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <a href="https://open.spotify.com/intl-es/track/1PQzZbitOJ6XPFg7FFzsKQ?si=85713d0d2a23416b" target="_blank" rel="noopener noreferrer">
+                               <img src="./assets/fotos/albumnes/elamor.jpg"  alt="el Amor despues del amor" class="w-full h-full object-cover"/>
+                               </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1992
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">EL AMOR DESPUÉS DEL AMOR</h3>
+                            <p class="text-sm mb-3">Fito Páez</p>
+                            <p class="text-sm italic">"Quién dijo que todo está perdido, yo vengo a ofrecer mi corazón..."</p>
+                        </div>
                     </div>
-                </div>
+                    
+                    <!-- Bocanada -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <a href="https://open.spotify.com/intl-es/album/2rIdWbXPjcq8K7BCccBhhC?si=4e5fb0df31804703" target="_blank" rel="noopener noreferrer">
+                               <img src="./assets/fotos/albumnes/bocanada.jpeg"  alt="Bocanada" class="w-full h-full object-cover"/>
+                               </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1999
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">BOCANADA</h3>
+                            <p class="text-sm mb-3">Gustavo Cerati</p>
+                            <p class="text-sm italic">"Puedo ver a través, la pared de tu piel..."</p>
+                        </div>
+                    </div>
+                     <!-- Los Abuelos de la Nada -->
+                      <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <a href="https://open.spotify.com/intl-es/album/0TKpGg43HU0IlGZ8U9xq4b?si=88fd4ff142154dc4" target="_blank" rel="noopener noreferrer">
+                                    <img src="./assets/fotos/albumnes/abuelos.jpeg" alt="Los Abuelos de la Nada" class="w-full h-full object-cover"/>
+                                </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1982
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">LOS ABUELOS DE LA NADA</h3>
+                            <p class="text-sm mb-3">Los Abuelos de la Nada</p>
+                            <p class="text-sm italic">"Mil horas y un par de fantasmas..."</p>
+                        </div>
+                    </div>
+                     <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <a href="https://open.spotify.com/intl-es/album/7LMidzEe6utRLx7hPiq2AL?si=4osh7vqVTPWh9yhIZJ_aPQ" target="_blank" rel="noopener noreferrer">
+                                    <img src="./assets/fotos/albumnes/contraluz.jpeg" alt="A Contraluz" class="w-full h-full object-cover"/>
+                                </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                2004
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">A CONTRALUZ</h3>
+                            <p class="text-sm mb-3">La Vela Puerca</p>
+                             <p class="text-sm italic">"Y sigo, sigo igual..."</p>
+                        </div>
+
+                    </div>
+
+                    <!-- Señales - Callejeros -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <a href="https://open.spotify.com/intl-es/album/573TG9cHInMww2QgBeKqTy?si=cDhlJz50QFudmB7jSym6tA" target="_blank" rel="noopener noreferrer">
+                                    <img src="./assets/fotos/albumnes/senales.webp" alt="Señales" class="w-full h-full object-cover"/>
+                                </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                2003
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">SEÑALES</h3>
+                            <p class="text-sm mb-3">Callejeros</p>
+                            <p class="text-sm italic">"Una nueva noche fría en el barrio..."</p>
+                        </div>
+                    </div>
+
+                     <!-- Crisis - Las Pastillas del Abuelo -->
+                      <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <a href="https://open.spotify.com/intl-es/album/6VW6vrsXtRe6IFPjJULhXo?si=RIG3EZWXRgGlO397wEVcqQ" target="_blank" rel="noopener noreferrer">
+                                    <img src="./assets/fotos/albumnes/crisis.jpg" alt="Crisis" class="w-full h-full object-cover"/>
+                                </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                2008
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">CRISIS</h3>
+                            <p class="text-sm mb-3">Las Pastillas del Abuelo</p>
+                            <p class="text-sm italic">"No somos culpables de vivir..."</p>
+                        </div>
+                    </div>
                 
                 <!-- Dynamo -->
                 <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
@@ -414,8 +491,8 @@
                     
                     <div>
                         <h4 class="font-stencil text-lg mb-4">CONTACTO</h4>
-                        <p class="mb-2">info@pasionrockera.com.ar</p>
-                        <p>Buenos Aires, Argentina</p>
+                        <p class="mb-2">felileal25@gmail.com</p>
+                        <pCórdobas, Argentina</p>
                     </div>
                 </div>
                 
