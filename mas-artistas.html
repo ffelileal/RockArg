@@ -240,7 +240,7 @@
                             <img  src="./assets/fotos/artistas/Charly Garcia.jpeg"  alt="Charly García"  class="w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                         </div>
-                        <div class="p-6">
+                        <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('charlyModal')">
                             <h3 class="font-stencil text-2xl mb-2 text-rockRed">CHARLY GARCÍA</h3>
                             <p class="text-sm mb-4">Actividad: 1967 - Presente</p>
                             <p class="mb-4">
@@ -262,6 +262,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="charlyModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                                <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                                    <button onclick="closeModal('charlyModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                                    <h3 class="text-2xl font-stencil text-rockRed mb-3">CHARLY GARCÍA</h3>
+                                    <p class="mb-2 text-sm text-gray-300">Figura clave y provocadora del rock argentino. Desde Sui Generis hasta su etapa solista, Charly rompió estructuras con una mezcla de virtuosismo, ironía y sensibilidad pop. Símbolo de genialidad y excesos.</p>
+                                    <p class="text-sm text-gray-400 italic">Éxitos: <em>"Demoliendo Hoteles"</em>, <em>"Yendo de la Cama al Living"</em>, <em>"Nos Siguen Pegando Abajo"</em>.</p>
+                                </div>
+                            </div>
                         </div>                  
                     <!-- Luis Alberto Spinetta -->
                     <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
@@ -269,7 +277,7 @@
                             <img  src="./assets/fotos/artistas/spinetta.png"  alt="Luis Spinetta"  class="w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                         </div>
-                        <div class="p-6">
+                        <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('spinettaModal')">
                             <h3 class="font-stencil text-2xl mb-2 text-rockRed">LUIS ALBERTO SPINETTA</h3>
                             <p class="text-sm mb-4">Actividad: 1967 - 2012</p>
                             <p class="mb-4">"El Flaco" fue un poeta del rock. Fundador de Almendra, Pescado Rabioso, Invisible y Spinetta Jade. Su obra, caracterizada por letras poéticas y complejas estructuras musicales, lo convirtió en una figura mítica.</p>
@@ -289,7 +297,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                         <div id="spinettaModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                                <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                                    <button onclick="closeModal('spinettaModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                                    <h3 class="text-2xl font-stencil text-rockRed mb-3">LUIS ALBERTO SPINNETA</h3>
+                                      <p class="mb-2 text-sm text-gray-300">Poeta cósmico y creador de universos sonoros. El Flaco elevó el rock a la categoría de arte con sus letras filosóficas y estructuras musicales únicas.</p>
+                                      <p class="text-sm text-gray-400 italic">Éxitos: <em>"Muchacha (Ojos de Papel)"</em>, <em>"Seguir Viviendo Sin Tu Amor"</em>, <em>"Barro Tal Vez"</em>.</p>
+                                    </div>
+                                </div>
+                            </div>
                     
                     <!-- Gustavo Cerati -->
                     <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
@@ -297,7 +313,7 @@
                             <img  src="./assets/fotos/artistas/cerati.jpeg"  alt="Gustavo Cerati"  class="w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                         </div>
-                        <div class="p-6">
+                        <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('ceratiModal')">
                             <h3 class="font-stencil text-2xl mb-2 text-rockRed">GUSTAVO CERATI</h3>
                             <p class="text-sm mb-4">Actividad: 1982 - 2010</p>
                             <p class="mb-4">Líder de Soda Stereo, la banda más influyente del rock latinoamericano. Su innovación sonora y su capacidad para reinventarse lo convirtieron en un ícono. Como solista exploró nuevos territorios musicales.</p>
@@ -316,6 +332,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="ceratiModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                            <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                                <button onclick="closeModal('ceratiModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                                <h3 class="text-2xl font-stencil text-rockRed mb-3">GUSTAVO CERATI</h3>
+                                <p class="mb-2 text-sm text-gray-300">Líder de Soda Stereo y arquitecto sonoro de una generación. Su obra combina poesía, tecnología y emoción. Uno de los músicos más innovadores y respetados del continente.</p>
+                                <p class="text-sm text-gray-400 italic">Éxitos: <em>"Crimen"</em>, <em>"Adiós"</em>, <em>"De Música Ligera"</em>.</p>
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- Fito Páez -->
@@ -324,7 +348,7 @@
                             <img  src="./assets/fotos/artistas/fito.jpeg"  alt="Fito Paez"  class="w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                         </div>
-                        <div class="p-6">
+                        <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('fitoModal')">
                             <h3 class="font-stencil text-2xl mb-2 text-rockRed">FITO PÁEZ</h3>
                             <p class="text-sm mb-4">Actividad: 1983 - Presente</p>
                             <p class="mb-4">Rosarino, pianista y compositor extraordinario. Comenzó en la banda de Charly García y luego desarrolló una exitosa carrera solista. Su álbum "El Amor Después del Amor" (1992) es el más vendido del rock argentino.</p>
@@ -342,6 +366,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="fitoModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                            <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                                <button onclick="closeModal('fitoModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                                <h3 class="text-2xl font-stencil text-rockRed mb-3">FITO PÁEZ</h3>
+                                <p class="mb-2 text-sm text-gray-300">El trovador rosarino mezcla lo íntimo y lo épico con una sensibilidad única. Su legado se define por discos conceptuales, arreglos brillantes y letras que conmueven y provocan.</p>
+                                <p class="text-sm text-gray-400 italic">Éxitos: <em>"Mariposa Tecknicolor"</em>, <em>"11 y 6"</em>, <em>"El Amor Después del Amor"</em>.</p>
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- Los Redondos -->
@@ -350,7 +382,7 @@
                             <img  src="./assets/fotos/artistas/ricota.jpg"  alt="Patricio Rey"  class="w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                         </div>
-                        <div class="p-6">
+                        <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('redondosModal')">
                             <h3 class="font-stencil text-2xl mb-2 text-rockRed">PATRICIO REY Y SUS REDONDITOS DE RICOTA</h3>
                             <p class="text-sm mb-4">Actividad: 1976 - 2001</p>
                             <p class="mb-4">Con el Indio Solari como líder, Los Redondos crearon un fenómeno cultural único. Rechazaron a los medios masivos y la industria, generando un culto alrededor de su música y sus shows, que se convirtieron en rituales para sus seguidores.</p>
@@ -370,6 +402,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="redondosModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                            <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                                <button onclick="closeModal('redondosModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                                <h3 class="text-2xl font-stencil text-rockRed mb-3">PATRICIO REY Y SUS REDONDITOS DE RICOTA</h3>
+                                <p class="mb-2 text-sm text-gray-300">Iconoclastas del rock nacional. Su estilo crudo, letras encriptadas y mística antisistema los transformó en la banda más popular y misteriosa del país.</p>
+                                <p class="text-sm text-gray-400 italic">Éxitos: <em>"Ji Ji Ji"</em>, <em>"La Bestia Pop"</em>, <em>"Un Ángel para tu Soledad"</em>.</p>
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- Soda Stereo -->
@@ -378,7 +418,7 @@
                             <img  src="./assets/fotos/artistas/soda.jpg"  alt="Soda Stereo"  class="w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                         </div>
-                        <div class="p-6">
+                        <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('sodaModal')">
                             <h3 class="font-stencil text-2xl mb-2 text-rockRed">SODA STEREO</h3>
                             <p class="text-sm mb-4">Actividad: 1982 - 1997, 2007</p>
                             <p class="mb-4">El trío formado por Gustavo Cerati, Zeta Bosio y Charly Alberti revolucionó el rock latinoamericano. Fueron pioneros en crear una estética moderna y un sonido que evolucionó constantemente, desde el new wave hasta el rock alternativo.</p>
@@ -390,14 +430,21 @@
                                 </div>
                                 <div>
                                     <p class="font-bold">Hit destacado:</p>
-                                    <p>
-                                        <a href="https://open.spotify.com/intl-es/track/5sH5FiHVs40Wdush9TENNp?si=4482f5e666df4b55"  target="_blank"  rel="noopener noreferrer" class="text-rockRed underline hover:text-rockRed/80 transition-colors"></a>
+                                    <p>                                                                                  
+                                        <a href="https://open.spotify.com/intl-es/track/5sH5FiHVs40Wdush9TENNp?si=4482f5e666df4b55"  target="_blank"  rel="noopener noreferrer" class="text-rockRed underline hover:text-rockRed/80 transition-colors">
                                             "Zona de Promesas"
-                                        </a>
+                                        </a> 
                                     </p>
                                 </div>
                             </div>
                         </div>
+                        <div id="sodaModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                            <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                                <button onclick="closeModal('sodaModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                                <h3 class="text-2xl font-stencil text-rockRed mb-3">SODA STEREO</h3>
+                                <p class="mb-2 text-sm text-gray-300">Reyes del rock en español en los años 80 y 90. Su innovación visual y musical marcó un antes y un después. Estética, vanguardia y una conexión emocional incomparable con su público.</p>
+                                <p class="text-sm text-gray-400 italic">Éxitos: <em>"De Música Ligera"</em>, <em>"Persiana Americana"</em>, <em>"Zona de Promesas"</em>.</p></div>
+                            </div>
                     </div>
                 
                 
@@ -405,10 +452,10 @@
                 <!-- Andrés Calamaro -->
                 <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
                     <div class="h-64 bg-rockGray relative overflow-hidden">
-                        <img src="https://i.scdn.co/image/ab6761610000e5eb5c9a9f0f6a1a0a0e0a1a0a0e" alt="Andrés Calamaro" class="w-full h-full object-cover">
+                        <img src="/assets/fotos/artistas/andres.jpg" alt="Andrés Calamaro" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('andresModal')">
                         <h3 class="font-stencil text-2xl mb-2 text-rockRed">ANDRÉS CALAMARO</h3>
                         <p class="text-sm mb-4">Actividad: 1981 - Presente</p>
                         <p class="mb-4">Exponente del rock argentino y español, conocido por su trabajo con Los Rodríguez y su extensa carrera solista. Su álbum "El Salmón" es considerado uno de los mejores de la historia del rock en español.</p>
@@ -424,18 +471,26 @@
                             </div>
                         </div>
                     </div>
+                    <div id="airbagModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                            <button onclick="closeModal('airbagModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                            <h3 class="text-2xl font-stencil text-rockRed mb-3">ANDRÉS CALAMARO</h3>
+                            <p class="mb-2 text-sm text-gray-300">Con más de cuatro décadas en la música, Andrés Calamaro ha sido parte esencial del rock en español. Desde Los Abuelos de la Nada hasta su prolífica carrera solista, ha dejado clásicos imborrables con una lírica tan callejera como sentimental.</p>
+                            <p class="text-sm text-gray-400 italic">Éxitos como <em>"Flaca"</em>, <em>"Crímenes Perfectos"</em> y <em>"Estadio Azteca"</em> lo consagran como uno de los grandes poetas del rock argentino.</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Fito Páez -->
                 <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
                     <div class="h-64 bg-rockGray relative overflow-hidden">
-                        <img src="https://i.scdn.co/image/ab6761610000e5eb5c9a9f0f6a1a0a0e0a1a0a0e" alt="Fito Páez" class="w-full h-full object-cover">
+                        <img src="/assets/fotos/artistas/airbag.webp" alt="Fito Páez" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="font-stencil text-2xl mb-2 text-rockRed">FITO PÁEZ</h3>
-                        <p class="text-sm mb-4">Actividad: 1983 - Presente</p>
-                        <p class="mb-4">Rosarino, pianista y compositor extraordinario. Comenzó en la banda de Charly García y luego desarrolló una exitosa carrera solista. Su álbum "El Amor Después del Amor" (1992) es el más vendido del rock argentino.</p>
+                    <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('airbagModal')">
+                        <h3 class="font-stencil text-2xl mb-2 text-rockRed">AIRBAG</h3>
+                        <p class="text-sm mb-4">Actividad: 2004 - Presente</p>
+                        <p class="mb-4">Banda de rock argentino originaria de Buenos Aires, formada por los hermanos Sardelli. Reconocidos por su estilo rockero clásico y energético, con influencias del rock inglés y una sólida carrera con álbumes que han marcado a toda una generación.</p>
                         <div class="flex items-center mt-4">
                             <div class="w-10 h-10 relative mr-3">
                                 <div class="absolute inset-0 bg-rockRed rounded-full vinyl-spin">
@@ -444,8 +499,16 @@
                             </div>
                             <div>
                                 <p class="font-bold">Hit destacado:</p>
-                                <p>"Mariposa Tecknicolor"</p>
+                                <p>"Solo Aquí"</p>
                             </div>
+                        </div>
+                    </div>
+                    <div id="airbagModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                            <button onclick="closeModal('airbagModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                            <h3 class="text-2xl font-stencil text-rockRed mb-3">EL INDIO SOLARI</h3>
+                            <p class="mb-2 text-sm text-gray-300">Formada en 2004 en Buenos Aires por los hermanos Sardelli, Airbag es una de las bandas de rock más destacadas de la nueva generación argentina. Su sonido potente y melódico combina influencias clásicas del rock con energía y frescura.</p>
+                            <p class="text-sm text-gray-400 italic">Canciones emblemáticas: <em>"Solo aquí"</em>, <em>"Cae el sol"</em> y <em>"A Whole Life"</em>.</p>
                         </div>
                     </div>
                 </div>
@@ -453,10 +516,10 @@
                 <!-- Indio Solari -->
                 <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
                     <div class="h-64 bg-rockGray relative overflow-hidden">
-                        <img src="https://i.scdn.co/image/ab6761610000e5eb5c9a9f0f6a1a0a0e0a1a0a0e" alt="Indio Solari" class="w-full h-full object-cover">
+                        <img src="/assets/fotos/artistas/indio.jpg" alt="Indio Solari" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('indiosolariModal')">
                         <h3 class="font-stencil text-2xl mb-2 text-rockRed">INDIO SOLARI</h3>
                         <p class="text-sm mb-4">Actividad: 1976 - Presente</p>
                         <p class="mb-4">Líder de Patricio Rey y sus Redonditos de Ricota, una de las bandas más influyentes del rock argentino. Tras la separación de Los Redondos, inició una exitosa carrera solista con su banda Los Fundamentalistas del Aire Acondicionado.</p>
@@ -472,15 +535,23 @@
                             </div>
                         </div>
                     </div>
+                    <div id="indiosolariModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                            <button onclick="closeModal('indiosolariModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                            <h3 class="text-2xl font-stencil text-rockRed mb-3">EL INDIO SOLARI</h3>
+                            <p class="mb-2 text-sm text-gray-300">Ex vocalista y figura icónica de Patricio Rey y sus Redonditos de Ricota. Con una carrera solista que se caracteriza por su estilo críptico y letras cargadas de crítica social, el Indio se ha consolidado como uno de los artistas más influyentes y misteriosos del rock argentino.</p>
+                            <p class="text-sm text-gray-400 italic">Canciones emblemáticas: <em>"Jijiji"</em>, <em>"Un poco de amor francés"</em>, y <em>"Todo un palo"</em>.</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- León Gieco -->
                 <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
                     <div class="h-64 bg-rockGray relative overflow-hidden">
-                        <img src="https://i.scdn.co/image/ab6761610000e5eb5c9a9f0f6a1a0a0e0a1a0a0e" alt="León Gieco" class="w-full h-full object-cover">
+                        <img src="/assets/fotos/artistas/leon.jpg" alt="León Gieco" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('leongiecoModal')">
                         <h3 class="font-stencil text-2xl mb-2 text-rockRed">LEÓN GIECO</h3>
                         <p class="text-sm mb-4">Actividad: 1973 - Presente</p>
                         <p class="mb-4">Conocido como el "Bob Dylan argentino", Gieco fusiona el rock con el folclore y letras de fuerte contenido social. Su canción "Solo le pido a Dios" se convirtió en un himno contra la guerra y la injusticia.</p>
@@ -496,18 +567,26 @@
                             </div>
                         </div>
                     </div>
+                    <div id="leongiecoModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                            <button onclick="closeModal('leongiecoModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                            <h3 class="text-2xl font-stencil text-rockRed mb-3">LEÓN GIECO</h3>
+                            <p class="mb-2 text-sm text-gray-300">Cantautor y compositor emblemático del folklore y rock argentino, León Gieco combina compromiso social con melodías pegajosas desde los años 70. Su obra ha marcado generaciones con canciones que hablan de justicia, derechos humanos y esperanza.</p>
+                            <p class="text-sm text-gray-400 italic">Canciones destacadas: <em>“Sólo le pido a Dios”</em>, <em>“Los Salieris de Charly”</em> y <em>“El Ángel de la Bicicleta”</em>.</p>
+                        </div>
+                    </div>
                 </div>
-                
-                <!-- Gustavo Cerati -->
+                <!-- Serú Girán -->
                 <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
+                    
                     <div class="h-64 bg-rockGray relative overflow-hidden">
-                        <img src="https://i.scdn.co/image/ab6761610000e5eb5c9a9f0f6a1a0a0e0a1a0a0e" alt="Gustavo Cerati" class="w-full h-full object-cover">
+                        <img src="./assets/fotos/artistas/seru.jpeg" alt="Seru Giran" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="font-stencil text-2xl mb-2 text-rockRed">GUSTAVO CERATI</h3>
-                        <p class="text-sm mb-4">Actividad: 1982 - 2010</p>
-                        <p class="mb-4">Líder de Soda Stereo, la banda más influyente del rock latinoamericano. Su innovación sonora y su capacidad para reinventarse lo convirtieron en un ícono. Como solista exploró nuevos territorios musicales.</p>
+                    <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('serugiranModal')">
+                        <h3 class="font-stencil text-2xl mb-2 text-rockRed">SERÚ GIRÁN</h3>
+                        <p class="text-sm mb-4">Actividad: 1978 - 1982</p>
+                        <p class="mb-4">Supergrupo formado por Charly García, David Lebón, Pedro Aznar y Oscar Moro, considerado uno de los pilares del rock argentino progresivo y sofisticado. Su música mezcla rock, jazz y clásicos con letras poéticas e inteligentes.</p>
                         <div class="flex items-center mt-4">
                             <div class="w-10 h-10 relative mr-3">
                                 <div class="absolute inset-0 bg-rockRed rounded-full vinyl-spin">
@@ -516,19 +595,26 @@
                             </div>
                             <div>
                                 <p class="font-bold">Hit destacado:</p>
-                                <p>"De Música Ligera"</p>
+                                <p>"Seminare"</p>
                             </div>
                         </div>
                     </div>
+                    <div id="serugiranModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                            <button onclick="closeModal('serugiranModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                            <h3 class="text-2xl font-stencil text-rockRed mb-3">SERU GIRAN</h3>
+                            <p class="mb-2 text-sm text-gray-300">Seru Giran fue un supergrupo argentino formado en 1978 por Charly García, David Lebón, Pedro Aznar y Oscar Moro. Con un estilo que combinaba rock progresivo, jazz y música clásica, marcaron una era con composiciones complejas y letras profundas.</p>
+                            <p class="text-sm text-gray-400 italic">Canciones emblemáticas: <em>"Seminare"</em>, <em>"Viernes 3 AM"</em>, y <em>"Eiti Leda"</em>.</p>
+                        </div>
+                    </div>
                 </div>
-                
                 <!-- Divididos -->
                 <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
                     <div class="h-64 bg-rockGray relative overflow-hidden">
-                        <img src="https://i.scdn.co/image/ab6761610000e5eb5c9a9f0f6a1a0a0e0a1a0a0e" alt="Divididos" class="w-full h-full object-cover">
+                        <img src="/assets/fotos/artistas/dividios.jpg" alt="Divididos" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('larengaModal')">
                         <h3 class="font-stencil text-2xl mb-2 text-rockRed">DIVIDIDOS</h3>
                         <p class="text-sm mb-4">Actividad: 1988 - Presente</p>
                         <p class="mb-4">Formados tras la separación de Sumo, Divididos se convirtió en una de las bandas más importantes del rock argentino, fusionando rock, reggae y ritmos folclóricos con letras profundas y poéticas.</p>
@@ -544,15 +630,23 @@
                             </div>
                         </div>
                     </div>
+                    <div id="larengaModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                            <button onclick="closeModal('larengaModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                            <h3 class="text-2xl font-stencil text-rockRed mb-3">DIVIDIDOS</h3>
+                            <p class="mb-2 text-sm text-gray-300">Conocidos como “La Aplanadora del Rock”, Divididos se formó en 1988 en Buenos Aires. Su estilo combina rock duro con elementos del folclore argentino, creando un sonido potente y original. Sus letras reflexivas y energía en vivo los convierten en una de las bandas más respetadas del país.</p>
+                            <p class="text-sm text-gray-400 italic">Clásicos como <em>“La Era de la Boludez”</em>, <em>“El 38”</em> y <em>“Spaghetti del Rock”</em> son himnos del rock nacional.</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Babasónicos -->
                 <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
                     <div class="h-64 bg-rockGray relative overflow-hidden">
-                        <img src="https://i.scdn.co/image/ab6761610000e5eb5c9a9f0f6a1a0a0e0a1a0a0e" alt="Babasónicos" class="w-full h-full object-cover">
+                        <img src="/assets/fotos/artistas/babonicos.jpg" alt="Babasónicos" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('larengaModal')">
                         <h3 class="font-stencil text-2xl mb-2 text-rockRed">BABASÓNICOS</h3>
                         <p class="text-sm mb-4">Actividad: 1991 - Presente</p>
                         <p class="mb-4">Una de las bandas más innovadoras del rock argentino, con un sonido que evolucionó desde el rock alternativo hasta el pop electrónico. Conocidos por su estética vanguardista y letras provocadoras.</p>
@@ -568,18 +662,25 @@
                             </div>
                         </div>
                     </div>
+                    <div id="larengaModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                            <button onclick="closeModal('larengaModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                            <h3 class="text-2xl font-stencil text-rockRed mb-3">BABASÓNICOS</h3>
+                            <p class="mb-2 text-sm text-gray-300">Formada en Buenos Aires en 1991, Babasónicos es una banda pionera del rock alternativo argentino. Reconocidos por su estilo ecléctico y experimental, combinan rock, pop, electrónica y psicodelia, creando sonidos innovadores y letras profundas que han marcado varias generaciones.</p>
+                            <p class="text-sm text-gray-400 italic">Álbumes icónicos como <em>“Infame”</em> y <em>“Jessico”</em>, y canciones destacadas como <em>“El Loco”</em> y <em>“Carismático”</em>.</p>                        </div>
+                    </div>
                 </div>
                 
                 <!-- La Renga -->
                 <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
                     <div class="h-64 bg-rockGray relative overflow-hidden">
-                        <img src="https://i.scdn.co/image/ab6761610000e5eb5c9a9f0f6a1a0a0e0a1a0a0e" alt="La Renga" class="w-full h-full object-cover">
+                        <img src="/assets/fotos/artistas/renga.webp" alt="La Renga" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                     </div>
-                    <div class="p-6">
+                    <div id="cardRenga" class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('larengaModal')">
                         <h3 class="font-stencil text-2xl mb-2 text-rockRed">LA RENGA</h3>
                         <p class="text-sm mb-4">Actividad: 1988 - Presente</p>
-                        <p class="mb-4">Icono del rock barrial y de estadio, manteniendo una postura independiente y cercana a su público. Sus recitales son verdaderos rituales para sus seguidores, conocidos como "renguistas".</p>
+                        <p class="mb-4">Icono del rock barrial y de estadio, conocidos por su postura independiente, letras crudas y recitales masivos que se convierten en rituales para sus fans "renguistas".</p>
                         <div class="flex items-center mt-4">
                             <div class="w-10 h-10 relative mr-3">
                                 <div class="absolute inset-0 bg-rockRed rounded-full vinyl-spin">
@@ -592,15 +693,23 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                
+                    <div id="larengaModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                            <button onclick="closeModal('larengaModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                            <h3 class="text-2xl font-stencil text-rockRed mb-3">LA RENGA</h3>
+                            <p class="mb-2 text-sm text-gray-300">Originaria de Mataderos, Buenos Aires, La Renga se formó en 1988 y rápidamente se convirtió en una de las bandas más influyentes del rock argentino. Con letras cargadas de crítica social y espiritualidad, y un sonido potente que mezcla hard rock con toques blueseros, lograron movilizar multitudes sin depender de los grandes medios.</p>
+                            <p class="text-sm text-gray-400 italic">Conciertos multitudinarios, autogestión total y himnos como <em>“Panic Show”</em>, <em>“La Balada del Diablo y La Muerte”</em> y <em>“El Final es en Donde Partí”</em>.</p>
+                        </div>
+                    </div>
+                </div>                
                 <!-- Los Fabulosos Cadillacs -->
                 <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
                     <div class="h-64 bg-rockGray relative overflow-hidden">
-                        <img src="https://i.scdn.co/image/ab6761610000e5eb5c9a9f0f6a1a0a0e0a1a0a0e" alt="Los Fabulosos Cadillacs" class="w-full h-full object-cover">
+                        <img src="/assets/fotos/artistas/cadilacs.jpg" alt="Los Fabulosos Cadillacs" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
                     </div>
-                    <div class="p-6">
+                   <!-- 📦 Carta del artista -->
+                    <div id="cardCadillacs" class="p-6 cursor-pointer hover:bg-rockGray/10 transition-colors" onclick="openModal('cadillacsModal')">
                         <h3 class="font-stencil text-2xl mb-2 text-rockRed">LOS FABULOSOS CADILLACS</h3>
                         <p class="text-sm mb-4">Actividad: 1985 - Presente</p>
                         <p class="mb-4">Pioneros en fusionar ska, rocksteady y reggae con rock en español. Ganadores de un Grammy y conocidos por su energía en el escenario y letras con contenido social.</p>
@@ -616,6 +725,15 @@
                             </div>
                         </div>
                     </div>
+                    <div id="cadillacsModal" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-lg p-6 rounded-lg relative border border-rockRed/60">
+                            <button onclick="closeModal('cadillacsModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl leading-none">&times;</button>
+                            <h3 class="text-2xl font-stencil text-rockRed mb-3">LOS FABULOSOS CADILLACS</h3>
+                            <p class="mb-2 text-sm text-gray-300">Fundada en Buenos Aires en 1985, la banda mezcló géneros como ska, reggae y punk con el rock latino. Liderados por Vicentico y Sr. Flavio, alcanzaron fama internacional con éxitos como <em>“El Matador”</em>, <em>“Mal Bicho”</em> y <em>“Siguiendo la Luna”</em>. Su estilo irreverente, letras políticas y puestas en escena energéticas los posicionaron como íconos del rock latinoamericano.</p>
+                            <p class="text-sm text-gray-400 italic">Grammy Latino, MTV Awards, y una base de fans inquebrantable.</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             
@@ -693,7 +811,7 @@
                     <div>
                         <h4 class="font-stencil text-lg mb-4">CONTACTO</h4>
                         <p class="mb-2">felileal25@gmail.com</p>
-                        <pCórdobas, Argentina</p>
+                        <p></p>Córdoba, Argentina</p>
                     </div>
                 </div>
                 
@@ -767,6 +885,14 @@
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
+        
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
     </script>
+    
 </body>
 </html>
