@@ -1,0 +1,30 @@
+<svg width="64" height="64" viewBox="0 0 64 64" 
+    fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Icono Pasión Rockera">
+  
+  <!-- Fondo negro -->
+  <circle cx="32" cy="32" r="30" fill="#121212"/>
+  
+  <!-- Disco vinilo gris oscuro -->
+  <circle cx="32" cy="32" r="25" fill="#333333" />
+  
+  <!-- Anillo rojo para destacar -->
+  <circle cx="32" cy="32" r="20" stroke="#e63946" stroke-width="4" fill="none"/>
+  
+  <!-- Centro: sol simplificado (rayos y círculo) -->
+  <circle cx="32" cy="32" r="8" fill="#e63946"/>
+  <g stroke="#121212" stroke-width="1.5" stroke-linecap="round">
+    <line x1="32" y1="20" x2="32" y2="14"/>
+    <line x1="32" y1="44" x2="32" y2="50"/>
+    <line x1="20" y1="32" x2="14" y2="32"/>
+    <line x1="44" y1="32" x2="50" y2="32"/>
+    <line x1="23" y1="23" x2="18" y2="18"/>
+    <line x1="41" y1="41" x2="46" y2="46"/>
+    <line x1="23" y1="41" x2="18" y2="46"/>
+    <line x1="41" y1="23" x2="46" y2="18"/>
+  </g>
+  
+  <!-- Púa estilizada formando P -->
+  <path d="M38 18 L45 32 L38 46 Q34 48 30 44 L30 20 Q34 16 38 18 Z" 
+        fill="#e63946" stroke="#121212" stroke-width="1.5"/>
+  <circle cx="36" cy="32" r="5" fill="#121212"/>
+</svg>

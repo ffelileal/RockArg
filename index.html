@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasión Rockera: Historia del Rock Argentino</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Staatliches&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/icono.svg" type="image/svg+xml">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rockRed: '#e63946',
+                        rockDark: '#121212',
+                        rockGray: '#333333',
+                    },
+                    fontFamily: {
+                        stencil: ['Staatliches', 'sans-serif'],
+                        typewriter: ['Special Elite', 'monospace'],
+                        marker: ['Permanent Marker', 'cursive'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'flicker': 'flicker 2s infinite alternate',
+                    },
+                    keyframes: {
+                        flicker: {
+                            '0%, 18%, 22%, 25%, 53%, 57%, 100%': { opacity: 1 },
+                            '20%, 24%, 55%': { opacity: 0.5 },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .vinyl-spin {
+            animation: spin 10s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .stage-light {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            filter: blur(30px);
+            opacity: 0.6;
+            z-index: 0;
+            animation: flicker 3s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 0.6; }
+            20%, 24%, 55% { opacity: 0.3; }
+        }
+        
+        .album-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.7);
+        }
+        
+        .artist-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #e63946;
+            left: -10px;
+            top: 0;
+        }
+        
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.05;
+        }
+        
+        .tape-effect {
+            position: relative;
+        }
+        
+        .tape-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                transparent 0px,
+                transparent 2px,
+                rgba(0, 0, 0, 0.1) 3px,
+                rgba(0, 0, 0, 0.1) 3px
+            );
+            pointer-events: none;
+        }
+        
+        .cut-text {
+            background: #fff;
+            color: #000;
+            padding: 0 5px;
+            clip-path: polygon(
+                0% 15%, 5% 0%, 95% 0%, 100% 15%,
+                100% 85%, 95% 100%, 5% 100%, 0% 85%
+            );
+        }
+        
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #e63946;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b52b35;
+        }
+        
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .vinyl-hole {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: #121212;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .vinyl-grooves {
+            position: absolute;
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .vinyl-grooves::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .vinyl-grooves::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .album-cover {
+            transition: transform 0.3s ease;
+        }
+        
+        .album-cover:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .loader {
+            border-width: 3px;
+        }
+
+    </style>
+</head>
+<body class="font-typewriter">
+    <div class="noise-bg"></div>
+    
+    <!-- Luces de escenario -->
+    <div class="stage-light" style="top: 20%; left: 10%; background-color: rgba(230, 57, 70, 0.5);"></div>
+    <div class="stage-light" style="top: 60%; left: 80%; background-color: rgba(230, 57, 70, 0.5);"></div>
+    <div class="stage-light" style="top: 30%; left: 70%; background-color: rgba(255, 255, 255, 0.3);"></div>
+    
+    <!-- Header con intro -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-rockDark via-rockDark/90 to-rockDark z-10"></div>
+            <div class="grid grid-cols-4 md:grid-cols-6 gap-4 p-4 opacity-40 z-0">
+                <!-- Collage de portadas de discos -->
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#333"/>
+                    <text x="50" y="50" font-family="Arial" font-size="12" fill="white" text-anchor="middle" dominant-baseline="middle">Artaud</text>
+                </svg>
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#222"/>
+                    <text x="50" y="50" font-family="Arial" font-size="10" fill="white" text-anchor="middle" dominant-baseline="middle">Clics Modernos</text>
+                </svg>
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#444"/>
+                    <text x="50" y="50" font-family="Arial" font-size="10" fill="white" text-anchor="middle" dominant-baseline="middle">Bocanada</text>
+                </svg>
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#555"/>
+                    <text x="50" y="50" font-family="Arial" font-size="8" fill="white" text-anchor="middle" dominant-baseline="middle">Oktubre</text>
+                </svg>
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#666"/>
+                    <text x="50" y="50" font-family="Arial" font-size="8" fill="white" text-anchor="middle" dominant-baseline="middle">Canción Animal</text>
+                </svg>
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#777"/>
+                    <text x="50" y="50" font-family="Arial" font-size="8" fill="white" text-anchor="middle" dominant-baseline="middle">Gulp!</text>
+                </svg>
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#333"/>
+                    <text x="50" y="50" font-family="Arial" font-size="8" fill="white" text-anchor="middle" dominant-baseline="middle">Piano Bar</text>
+                </svg>
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#444"/>
+                    <text x="50" y="50" font-family="Arial" font-size="8" fill="white" text-anchor="middle" dominant-baseline="middle">Dynamo</text>
+                </svg>
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#555"/>
+                    <text x="50" y="50" font-family="Arial" font-size="8" fill="white" text-anchor="middle" dominant-baseline="middle">Ahí Vamos</text>
+                </svg>
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#666"/>
+                    <text x="50" y="50" font-family="Arial" font-size="8" fill="white" text-anchor="middle" dominant-baseline="middle">Giros</text>
+                </svg>
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#777"/>
+                    <text x="50" y="50" font-family="Arial" font-size="8" fill="white" text-anchor="middle" dominant-baseline="middle">La Grasa de las Capitales</text>
+                </svg>
+                <svg class="w-full aspect-square" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#333"/>
+                    <text x="50" y="50" font-family="Arial" font-size="8" fill="white" text-anchor="middle" dominant-baseline="middle">Fuerza Natural</text>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="container mx-auto px-4 z-20 text-center">
+            <h1 class="font-stencil text-4xl md:text-7xl mb-6 text-white tracking-wider">
+                PASIÓN <span class="text-rockRed">ROCKERA</span>
+            </h1>
+            <h2 class="font-stencil text-xl md:text-3xl mb-12 text-white/80">HISTORIA DEL ROCK ARGENTINO</h2>
+            
+            <div class="relative inline-block mb-12 p-6 border-2 border-rockRed bg-black/50 backdrop-blur-sm">
+                <p class="font-marker text-xl md:text-3xl italic text-white">
+                    "El que no salta es un inglés"
+                </p>
+                <div class="absolute -top-2 -right-2 w-4 h-4 bg-rockRed"></div>
+                <div class="absolute -bottom-2 -left-2 w-4 h-4 bg-rockRed"></div>
+            </div>
+            
+            <div class="mt-12">
+                <a href="#nav" class="inline-block animate-bounce">
+                    <svg class="w-10 h-10 text-rockRed" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navegación -->
+    <nav id="nav" class="sticky top-0 bg-rockDark border-b border-rockRed z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap items-center justify-between py-4">
+                <div class="flex items-center">
+                    <div class="relative w-10 h-10 mr-3">
+                        <div class="absolute inset-0 bg-rockRed rounded-full vinyl-spin">
+                            <div class="vinyl-hole"></div>
+                            <div class="vinyl-grooves"></div>
+                        </div>
+                    </div>
+                    <span class="font-stencil text-xl">PASIÓN ROCKERA</span>
+                </div>
+                
+                <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                
+                <div id="menu" class="hidden md:flex w-full md:w-auto mt-4 md:mt-0">
+                    <ul class="flex flex-col md:flex-row md:space-x-6">
+                        <li><a href="#historia" class="block py-2 hover:text-rockRed transition-colors">Historia</a></li>
+                        <li><a href="#bandas" class="block py-2 hover:text-rockRed transition-colors">Bandas y Solistas</a></li>
+                        <li><a href="#albumes" class="block py-2 hover:text-rockRed transition-colors">Álbumes</a></li>
+                        <li><a href="#politica" class="block py-2 hover:text-rockRed transition-colors">Rock y Política</a></li>
+                        <li><a href="#playlist" class="block py-2 hover:text-rockRed transition-colors">Playlist</a></li>
+                        <li><a href="#galeria" class="block py-2 hover:text-rockRed transition-colors">Galería</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <main>
+        <!-- Historia del Rock Argentino -->
+        <section id="historia" class="py-20 relative">
+            <div class="stage-light" style="top: 30%; left: 20%; background-color: rgba(230, 57, 70, 0.3);"></div>
+            
+            <div class="container mx-auto px-4">
+                <h2 class="font-stencil text-4xl mb-12 text-center">
+                    <span class="bg-rockRed px-4 py-1">HISTORIA DEL ROCK ARGENTINO</span> 🧠
+                </h2>
+                
+                <div class="relative pl-8 border-l-2 border-rockRed">
+                    <div class="timeline-item relative mb-16 pl-8">
+                        <h3 class="font-stencil text-2xl mb-3 text-rockRed">LOS 60s: LOS PIONEROS</h3>
+                        <div class="bg-rockGray/50 p-6 backdrop-blur-sm">
+                            <p class="mb-4">La historia del rock argentino comienza con Los Gatos y su hit "La Balsa" (1967), considerado el primer gran éxito del rock nacional. Liderados por Litto Nebbia, abrieron el camino para bandas como Almendra (con Luis Alberto Spinetta) y Manal.</p>
+                            <p>Esta década estuvo marcada por la experimentación y la adaptación del rock anglosajón a las raíces culturales argentinas, creando un sonido único que se distanciaba de la música popular de la época.</p>
+                            <div class="mt-4 inline-block cut-text font-marker">
+                                "Estoy muy solo y triste acá, en este mundo abandonado..."
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item relative mb-16 pl-8">
+                        <h3 class="font-stencil text-2xl mb-3 text-rockRed">LOS 70s: PROGRESIVO Y DICTADURA</h3>
+                        <div class="bg-rockGray/50 p-6 backdrop-blur-sm">
+                            <p class="mb-4">Los años 70 vieron el surgimiento del rock progresivo con bandas como Sui Generis (Charly García y Nito Mestre), Invisible y Pescado Rabioso. El golpe militar de 1976 marcó un antes y después, con censura y persecución.</p>
+                            <p>El rock se convirtió en un espacio de resistencia cultural. Los recitales eran uno de los pocos lugares donde los jóvenes podían reunirse. Serú Girán se formó en este contexto, con letras metafóricas para eludir la censura.</p>
+                            <div class="mt-4 inline-block cut-text font-marker">
+                                "Los dinosaurios van a desaparecer..."
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item relative mb-16 pl-8">
+                        <h3 class="font-stencil text-2xl mb-3 text-rockRed">LOS 80s: DEMOCRACIA Y EXPLOSIÓN</h3>
+                        <div class="bg-rockGray/50 p-6 backdrop-blur-sm">
+                            <p class="mb-4">Con el regreso de la democracia en 1983, el rock argentino vivió una explosión creativa. Soda Stereo, liderado por Gustavo Cerati, revolucionó la escena con un sonido moderno y letras urbanas. Surgieron bandas como Virus, Los Twist, Sumo y Los Redonditos de Ricota.</p>
+                            <p>La Guerra de Malvinas (1982) tuvo un impacto paradójico: la prohibición de música en inglés en las radios dio mayor difusión al rock nacional. El festival "Festival de la Solidaridad Latinoamericana" marcó un hito con más de 60,000 asistentes.</p>
+                            <div class="mt-4 inline-block cut-text font-marker">
+                                "No sólo no hubo futuro, sino que no hay presente..."
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item relative mb-16 pl-8">
+                        <h3 class="font-stencil text-2xl mb-3 text-rockRed">LOS 90s: MASIFICACIÓN Y DIVERSIDAD</h3>
+                        <div class="bg-rockGray/50 p-6 backdrop-blur-sm">
+                            <p class="mb-4">Los 90 trajeron la masificación del rock argentino. Soda Stereo llenaba estadios en toda Latinoamérica, mientras surgían nuevas propuestas como Babasónicos, Illya Kuryaki and the Valderramas y Los Fabulosos Cadillacs, que fusionaban el rock con otros géneros.</p>
+                            <p>El fenómeno "rock barrial" tomó fuerza con bandas como La Renga, Attaque 77 y Divididos. El "rock chabón" conectó con las clases trabajadoras y los barrios periféricos, ampliando la base social del género.</p>
+                            <div class="mt-4 inline-block cut-text font-marker">
+                                "¿Por qué no puedo ser del jet-set?"
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item relative mb-16 pl-8">
+                        <h3 class="font-stencil text-2xl mb-3 text-rockRed">2000 - PRESENTE: NUEVAS VOCES</h3>
+                        <div class="bg-rockGray/50 p-6 backdrop-blur-sm">
+                            <p class="mb-4">El nuevo milenio trajo la consolidación de figuras como Gustavo Cerati como solista y el surgimiento de bandas como Árbol, Catupecu Machu y Carajo. La tragedia de Cromañón en 2004 marcó un punto de inflexión para los shows en vivo.</p>
+                            <p>En las últimas décadas, el rock argentino ha seguido evolucionando con propuestas como Eruca Sativa, Él Mató a un Policía Motorizado y Marilina Bertoldi, incorporando elementos de indie, electrónica y otros géneros, manteniendo viva la tradición rockera argentina.</p>
+                            <div class="mt-4 inline-block cut-text font-marker">
+                                "El futuro llegó hace rato..."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Bandas y solistas legendarios -->
+        <section id="bandas" class="py-20 bg-rockGray/30 relative">
+            <div class="stage-light" style="top: 50%; left: 80%; background-color: rgba(255, 255, 255, 0.2);"></div>
+            
+            <div class="container mx-auto px-4">
+                <h2 class="font-stencil text-4xl mb-12 text-center">
+                    <span class="bg-rockRed px-4 py-1">BANDAS Y SOLISTAS LEGENDARIOS</span> 🎤
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Charly García -->
+                    <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
+                        <div class="h-64 bg-rockGray relative overflow-hidden">
+                            <img  src="./assets/fotos/artistas/Charly Garcia.jpeg"  alt="Charly García"  class="w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-stencil text-2xl mb-2 text-rockRed">CHARLY GARCÍA</h3>
+                            <p class="text-sm mb-4">Actividad: 1967 - Presente</p>
+                            <p class="mb-4">
+                                Genio indiscutido del rock argentino. Desde Sui Generis, pasando por La Máquina de Hacer Pájaros,
+                                Serú Girán y su carrera solista, Charly revolucionó la música con su talento compositivo y su actitud irreverente.</p>
+                                <div class="flex items-center mt-4">
+                                    <div class="w-10 h-10 relative mr-3">
+                                        <div class="absolute inset-0 bg-rockRed rounded-full">
+                                            <div class="vinyl-hole"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold">Hit destacado:</p>
+                                        <p>
+                                            <a href="https://open.spotify.com/intl-es/track/29iIRrSuANyjnwag69PHOJ?si=9cb62e03dab64b39"  target="_blank"  rel="noopener noreferrer" class="text-rockRed underline hover:text-rockRed/80 transition-colors">
+                                                "Demoliendo Hoteles"
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                  
+                    <!-- Luis Alberto Spinetta -->
+                    <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
+                        <div class="h-64 bg-rockGray relative overflow-hidden">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="100" fill="#333"/>
+                                <path d="M30,30 Q50,10 70,30 Q90,50 70,70 Q50,90 30,70 Q10,50 30,30" fill="none" stroke="#ddd" stroke-width="1"/>
+                                <text x="50" y="55" font-family="Arial" font-size="5" fill="white" text-anchor="middle">El Flaco</text>
+                            </svg>
+                            <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-stencil text-2xl mb-2 text-rockRed">LUIS ALBERTO SPINETTA</h3>
+                            <p class="text-sm mb-4">Actividad: 1967 - 2012</p>
+                            <p class="mb-4">"El Flaco" fue un poeta del rock. Fundador de Almendra, Pescado Rabioso, Invisible y Spinetta Jade. Su obra, caracterizada por letras poéticas y complejas estructuras musicales, lo convirtió en una figura mítica.</p>
+                            <div class="flex items-center mt-4">
+                                <div class="w-10 h-10 relative mr-3">
+                                    <div class="absolute inset-0 bg-rockRed rounded-full">
+                                        <div class="vinyl-hole"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Hit destacado:</p>
+                                    <p>"Muchacha (Ojos de Papel)"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Gustavo Cerati -->
+                    <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
+                        <div class="h-64 bg-rockGray relative overflow-hidden">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="100" fill="#444"/>
+                                <rect x="30" y="30" width="40" height="50" fill="#ddd"/>
+                                <rect x="40" y="40" width="20" height="5" fill="#444"/>
+                                <text x="50" y="65" font-family="Arial" font-size="5" fill="black" text-anchor="middle">Cerati</text>
+                            </svg>
+                            <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-stencil text-2xl mb-2 text-rockRed">GUSTAVO CERATI</h3>
+                            <p class="text-sm mb-4">Actividad: 1982 - 2010</p>
+                            <p class="mb-4">Líder de Soda Stereo, la banda más influyente del rock latinoamericano. Su innovación sonora y su capacidad para reinventarse lo convirtieron en un ícono. Como solista exploró nuevos territorios musicales.</p>
+                            <div class="flex items-center mt-4">
+                                <div class="w-10 h-10 relative mr-3">
+                                    <div class="absolute inset-0 bg-rockRed rounded-full">
+                                        <div class="vinyl-hole"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Hit destacado:</p>
+                                    <p>"De Música Ligera"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Fito Páez -->
+                    <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
+                        <div class="h-64 bg-rockGray relative overflow-hidden">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="100" fill="#555"/>
+                                <rect x="25" y="25" width="50" height="30" fill="#ddd"/>
+                                <rect x="35" y="55" width="30" height="20" fill="#ddd"/>
+                                <text x="50" y="45" font-family="Arial" font-size="5" fill="black" text-anchor="middle">Fito</text>
+                            </svg>
+                            <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-stencil text-2xl mb-2 text-rockRed">FITO PÁEZ</h3>
+                            <p class="text-sm mb-4">Actividad: 1983 - Presente</p>
+                            <p class="mb-4">Rosarino, pianista y compositor extraordinario. Comenzó en la banda de Charly García y luego desarrolló una exitosa carrera solista. Su álbum "El Amor Después del Amor" (1992) es el más vendido del rock argentino.</p>
+                            <div class="flex items-center mt-4">
+                                <div class="w-10 h-10 relative mr-3">
+                                    <div class="absolute inset-0 bg-rockRed rounded-full">
+                                        <div class="vinyl-hole"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Hit destacado:</p>
+                                    <p>"Mariposa Tecknicolor"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Los Redondos -->
+                    <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
+                        <div class="h-64 bg-rockGray relative overflow-hidden">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="100" fill="#333"/>
+                                <circle cx="50" cy="50" r="25" fill="none" stroke="#ddd" stroke-width="2"/>
+                                <text x="50" y="53" font-family="Arial" font-size="5" fill="white" text-anchor="middle">Redondos</text>
+                            </svg>
+                            <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-stencil text-2xl mb-2 text-rockRed">PATRICIO REY Y SUS REDONDITOS DE RICOTA</h3>
+                            <p class="text-sm mb-4">Actividad: 1976 - 2001</p>
+                            <p class="mb-4">Con el Indio Solari como líder, Los Redondos crearon un fenómeno cultural único. Rechazaron a los medios masivos y la industria, generando un culto alrededor de su música y sus shows, que se convirtieron en rituales para sus seguidores.</p>
+                            <div class="flex items-center mt-4">
+                                <div class="w-10 h-10 relative mr-3">
+                                    <div class="absolute inset-0 bg-rockRed rounded-full">
+                                        <div class="vinyl-hole"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Hit destacado:</p>
+                                    <p>"Ji Ji Ji"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Soda Stereo -->
+                    <div class="artist-card bg-rockDark border border-rockRed/50 overflow-hidden transition-transform duration-300">
+                        <div class="h-64 bg-rockGray relative overflow-hidden">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="100" height="100" fill="#222"/>
+                                <circle cx="50" cy="50" r="20" fill="#ddd"/>
+                                <text x="50" y="53" font-family="Arial" font-size="5" fill="black" text-anchor="middle">Soda</text>
+                            </svg>
+                            <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-stencil text-2xl mb-2 text-rockRed">SODA STEREO</h3>
+                            <p class="text-sm mb-4">Actividad: 1982 - 1997, 2007</p>
+                            <p class="mb-4">El trío formado por Gustavo Cerati, Zeta Bosio y Charly Alberti revolucionó el rock latinoamericano. Fueron pioneros en crear una estética moderna y un sonido que evolucionó constantemente, desde el new wave hasta el rock alternativo.</p>
+                            <div class="flex items-center mt-4">
+                                <div class="w-10 h-10 relative mr-3">
+                                    <div class="absolute inset-0 bg-rockRed rounded-full">
+                                        <div class="vinyl-hole"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Hit destacado:</p>
+                                    <p>"En la Ciudad de la Furia"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button id="ver-mas-artistas" class="bg-rockRed hover:bg-rockRed/80 text-white font-stencil py-3 px-6 transition-colors" onclick="window.location.href='mas-artistas.html'">
+                        VER MÁS ARTISTAS
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Álbumes fundamentales -->
+        <section id="albumes" class="py-20 relative">
+            <div class="stage-light" style="top: 20%; left: 60%; background-color: rgba(230, 57, 70, 0.4);"></div>
+            
+            <div class="container mx-auto px-4">
+                <h2 class="font-stencil text-4xl mb-12 text-center">
+                    <span class="bg-rockRed px-4 py-1">ÁLBUMES FUNDAMENTALES</span> 💿
+                </h2>
+                
+                <div class="album-grid">
+                    <!-- Artaud -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <a href="https://open.spotify.com/intl-es/album/5MJR9j21vjEi4ODxzhvoTA?si=bd65eabc54664002" target="_blank" rel="noopener noreferrer">
+                               <img src="./fotos/Pescado_Rabioso-Spinetta_-_Artaud.png"  alt="Portada del álbum Artaud" class="w-full h-full object-cover"/>
+                               </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1973
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">ARTAUD</h3>
+                            <p class="text-sm mb-3">Luis Alberto Spinetta</p>
+                            <p class="text-sm italic">"Todas las hojas son del viento, hasta que caen..."</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Clics Modernos -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="100" fill="#222"/>
+                                    <rect x="25" y="25" width="50" height="50" fill="#ddd"/>
+                                    <text x="50" y="50" font-family="Arial" font-size="6" fill="black" text-anchor="middle" dominant-baseline="middle">Clics Modernos</text>
+                                </svg>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1983
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">CLICS MODERNOS</h3>
+                            <p class="text-sm mb-3">Charly García</p>
+                            <p class="text-sm italic">"Nos siguen pegando abajo..."</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Canción Animal -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="100" fill="#444"/>
+                                    <circle cx="50" cy="50" r="30" fill="#ddd"/>
+                                    <text x="50" y="50" font-family="Arial" font-size="6" fill="black" text-anchor="middle" dominant-baseline="middle">Canción Animal</text>
+                                </svg>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1990
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">CANCIÓN ANIMAL</h3>
+                            <p class="text-sm mb-3">Soda Stereo</p>
+                            <p class="text-sm italic">"Un millón de años luz de casa..."</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Oktubre -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="100" fill="#333"/>
+                                    <circle cx="50" cy="50" r="25" fill="#e63946"/>
+                                    <text x="50" y="53" font-family="Arial" font-size="8" fill="white" text-anchor="middle">Oktubre</text>
+                                </svg>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1986
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">OKTUBRE</h3>
+                            <p class="text-sm mb-3">Patricio Rey y sus Redonditos de Ricota</p>
+                            <p class="text-sm italic">"Ji ji ji, se va a acabar, se va a acabar la dictadura del macho..."</p>
+                        </div>
+                    </div>
+                    
+                    <!-- El Amor Después del Amor -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="100" fill="#555"/>
+                                    <path d="M30,50 Q50,30 70,50 Q50,70 30,50" fill="#ddd" stroke="#ddd" stroke-width="2"/>
+                                    <text x="50" y="80" font-family="Arial" font-size="5" fill="white" text-anchor="middle">El Amor Después del Amor</text>
+                                </svg>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1992
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">EL AMOR DESPUÉS DEL AMOR</h3>
+                            <p class="text-sm mb-3">Fito Páez</p>
+                            <p class="text-sm italic">"Quién dijo que todo está perdido, yo vengo a ofrecer mi corazón..."</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Bocanada -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="100" height="100" fill="#111"/>
+                                    <circle cx="50" cy="50" r="20" fill="#ddd"/>
+                                    <text x="50" y="53" font-family="Arial" font-size="6" fill="black" text-anchor="middle">Bocanada</text>
+                                </svg>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1999
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">BOCANADA</h3>
+                            <p class="text-sm mb-3">Gustavo Cerati</p>
+                            <p class="text-sm italic">"Puedo ver a través, la pared de tu piel..."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                     <button id="ver-mas-artistas" class="bg-rockRed hover:bg-rockRed/80 text-white font-stencil py-3 px-6 transition-colors" onclick="window.location.href='mas-album.html'">
+                        VER MÁS ÁLBUMES
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Rock y política -->
+        <section id="politica" class="py-20 bg-rockGray/30 relative">
+            <div class="stage-light" style="top: 70%; left: 30%; background-color: rgba(255, 255, 255, 0.2);"></div>
+            
+            <div class="container mx-auto px-4">
+                <h2 class="font-stencil text-4xl mb-12 text-center">
+                    <span class="bg-rockRed px-4 py-1">ROCK Y POLÍTICA</span> 🗣️
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-rockDark p-6 border-l-4 border-rockRed">
+                        <h3 class="font-stencil text-2xl mb-4">LA DICTADURA (1976-1983)</h3>
+                        <p class="mb-4">Durante la dictadura militar, el rock argentino se convirtió en un espacio de resistencia cultural. Muchos artistas utilizaron metáforas y alegorías para eludir la censura y expresar su descontento.</p>
+                        <p class="mb-4">Charly García compuso "Los Dinosaurios" como una referencia a los militares y las desapariciones. Serú Girán, con temas como "Canción de Alicia en el país", utilizaba referencias literarias para hablar de la realidad argentina.</p>
+                        <div class="mt-6 p-4 bg-rockGray/50 border-l-2 border-rockRed">
+                            <p class="italic">"Los amigos del barrio pueden desaparecer, los cantores de radio pueden desaparecer. Los que están en los diarios pueden desaparecer, pero los dinosaurios van a desaparecer."</p>
+                            <p class="text-right mt-2">- Charly García</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-rockDark p-6 border-l-4 border-rockRed">
+                        <h3 class="font-stencil text-2xl mb-4">GUERRA DE MALVINAS (1982)</h3>
+                        <p class="mb-4">La Guerra de Malvinas tuvo un impacto paradójico en el rock nacional. La prohibición de música en inglés en las radios dio mayor difusión a los artistas locales.</p>
+                        <p class="mb-4">El "Festival de la Solidaridad Latinoamericana" reunió a más de 60,000 personas en un momento donde las reuniones masivas estaban prohibidas. Fue un acto de resistencia pacífica a través de la música.</p>
+                        <div class="mt-6 p-4 bg-rockGray/50 border-l-2 border-rockRed">
+                            <p class="italic">"Solo le pido a Dios que la guerra no me sea indiferente, es un monstruo grande y pisa fuerte toda la pobre inocencia de la gente."</p>
+                            <p class="text-right mt-2">- León Gieco</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-rockDark p-6 border-l-4 border-rockRed">
+                        <h3 class="font-stencil text-2xl mb-4">RETORNO A LA DEMOCRACIA (1983)</h3>
+                        <p class="mb-4">Con el regreso de la democracia, el rock argentino vivió una explosión creativa. Las letras se volvieron más directas y los temas sociales se abordaron sin necesidad de metáforas.</p>
+                        <p class="mb-4">Bandas como Soda Stereo, Virus y Los Twist representaron una nueva generación que celebraba la libertad recién recuperada con sonidos modernos y letras urbanas.</p>
+                        <div class="mt-6 p-4 bg-rockGray/50 border-l-2 border-rockRed">
+                            <p class="italic">"Yo sé que te dejaron, yo sé que te dejaron, yo sé que te dejaron, yo sé que te dejaron, yo sé que te dejaron sin poder respirar."</p>
+                            <p class="text-right mt-2">- Soda Stereo</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-rockDark p-6 border-l-4 border-rockRed">
+                        <h3 class="font-stencil text-2xl mb-4">MENEMISMO Y CRISIS (1990-2001)</h3>
+                        <p class="mb-4">Durante los años 90, el rock reflejó la polarización social. Mientras algunas bandas como Soda Stereo alcanzaban éxito internacional, surgía el "rock chabón" con bandas como La Renga y Divididos, que conectaban con las clases trabajadoras.</p>
+                        <p class="mb-4">La crisis del 2001 fue anticipada por muchas letras que hablaban de la desigualdad y la corrupción. Bersuit Vergarabat lanzó "La Argentinidad al Palo" como reflejo de ese momento histórico.</p>
+                        <div class="mt-6 p-4 bg-rockGray/50 border-l-2 border-rockRed">
+                            <p class="italic">"Se viene el estallido, se viene el estallido, de mi guitarra, de tu gobierno, también."</p>
+                            <p class="text-right mt-2">- Bersuit Vergarabat</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 p-8 bg-rockDark border border-rockRed/50 relative overflow-hidden">
+                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-rockRed/20 rounded-full blur-xl"></div>
+                    <h3 class="font-stencil text-2xl mb-6 relative z-10">EL LEGADO POLÍTICO DEL ROCK ARGENTINO</h3>
+                    <p class="mb-4 relative z-10">El rock argentino ha sido, desde sus inicios, mucho más que un género musical. Ha funcionado como la voz de generaciones enteras, como cronista social y como espacio de resistencia cultural.</p>
+                    <p class="mb-4 relative z-10">A diferencia de otros países, en Argentina el rock siempre tuvo un componente político y social muy marcado. Incluso en sus manifestaciones más lúdicas o festivas, el rock nacional ha mantenido una postura crítica frente al poder establecido.</p>
+                    <p class="relative z-10">Este compromiso con la realidad social ha sido una de las razones de su vigencia a lo largo de más de cinco décadas, convirtiéndose en parte fundamental de la identidad cultural argentina.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Playlist recomendada -->
+        <section id="playlist" class="py-20 relative">
+            <div class="stage-light" style="top: 40%; left: 70%; background-color: rgba(230, 57, 70, 0.3);"></div>
+            
+            <div class="container mx-auto px-4">
+                <h2 class="font-stencil text-4xl mb-12 text-center">
+                    <span class="bg-rockRed px-4 py-1">PLAYLIST RECOMENDADA</span> 🎧
+                </h2>
+                
+                <div class="max-w-3xl mx-auto">
+                    <div class="bg-rockDark border border-rockRed/50 p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 relative mr-4">
+                                <div class="absolute inset-0 bg-rockRed rounded-md vinyl-spin">
+                                    <div class="vinyl-hole"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-stencil text-2xl">CLÁSICOS DEL ROCK ARGENTINO</h3>
+                                <p class="text-sm">50 canciones • 3h 25min</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <div class="bg-rockGray/30 p-4 mb-4 border-l-2 border-rockRed">
+                                <p class="text-sm mb-1">Esta playlist recorre cinco décadas de rock nacional, desde los pioneros hasta las figuras contemporáneas. Un viaje sonoro por la historia musical argentina.</p>
+                            </div>
+                            
+                            <div class="flex justify-center">
+                                <button class="bg-rockRed hover:bg-rockRed/80 text-white font-stencil py-3 px-6 transition-colors flex items-center">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    REPRODUCIR PLAYLIST
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <div class="flex items-center p-3 hover:bg-rockGray/20 transition-colors">
+                                <div class="w-8 text-center mr-4">1</div>
+                                <div class="flex-grow">
+                                    <p class="font-medium">La Balsa</p>
+                                    <p class="text-sm text-gray-400">Los Gatos</p>
+                                </div>
+                                <div class="text-sm">2:52</div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 hover:bg-rockGray/20 transition-colors">
+                                <div class="w-8 text-center mr-4">2</div>
+                                <div class="flex-grow">
+                                    <p class="font-medium">Muchacha (Ojos de Papel)</p>
+                                    <p class="text-sm text-gray-400">Almendra</p>
+                                </div>
+                                <div class="text-sm">3:05</div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 hover:bg-rockGray/20 transition-colors">
+                                <div class="w-8 text-center mr-4">3</div>
+                                <div class="flex-grow">
+                                    <p class="font-medium">Rasguña las Piedras</p>
+                                    <p class="text-sm text-gray-400">Sui Generis</p>
+                                </div>
+                                <div class="text-sm">4:05</div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 hover:bg-rockGray/20 transition-colors">
+                                <div class="w-8 text-center mr-4">4</div>
+                                <div class="flex-grow">
+                                    <p class="font-medium">Canción para mi Muerte</p>
+                                    <p class="text-sm text-gray-400">Sui Generis</p>
+                                </div>
+                                <div class="text-sm">3:52</div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 hover:bg-rockGray/20 transition-colors">
+                                <div class="w-8 text-center mr-4">5</div>
+                                <div class="flex-grow">
+                                    <p class="font-medium">Seminare</p>
+                                    <p class="text-sm text-gray-400">Serú Girán</p>
+                                </div>
+                                <div class="text-sm">3:36</div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 hover:bg-rockGray/20 transition-colors">
+                                <div class="w-8 text-center mr-4">6</div>
+                                <div class="flex-grow">
+                                    <p class="font-medium">De Música Ligera</p>
+                                    <p class="text-sm text-gray-400">Soda Stereo</p>
+                                </div>
+                                <div class="text-sm">3:32</div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 hover:bg-rockGray/20 transition-colors">
+                                <div class="w-8 text-center mr-4">7</div>
+                                <div class="flex-grow">
+                                    <p class="font-medium">Ji Ji Ji</p>
+                                    <p class="text-sm text-gray-400">Patricio Rey y sus Redonditos de Ricota</p>
+                                </div>
+                                <div class="text-sm">5:02</div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 hover:bg-rockGray/20 transition-colors">
+                                <div class="w-8 text-center mr-4">8</div>
+                                <div class="flex-grow">
+                                    <p class="font-medium">Mariposa Tecknicolor</p>
+                                    <p class="text-sm text-gray-400">Fito Páez</p>
+                                </div>
+                                <div class="text-sm">3:42</div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 hover:bg-rockGray/20 transition-colors">
+                                <div class="w-8 text-center mr-4">9</div>
+                                <div class="flex-grow">
+                                    <p class="font-medium">Crimen</p>
+                                    <p class="text-sm text-gray-400">Gustavo Cerati</p>
+                                </div>
+                                <div class="text-sm">3:48</div>
+                            </div>
+                            
+                            <div class="flex items-center p-3 hover:bg-rockGray/20 transition-colors">
+                                <div class="w-8 text-center mr-4">10</div>
+                                <div class="flex-grow">
+                                    <p class="font-medium">Lamento Boliviano</p>
+                                    <p class="text-sm text-gray-400">Los Enanitos Verdes</p>
+                                </div>
+                                <div class="text-sm">3:39</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <button class="text-rockRed hover:text-white hover:bg-rockRed/30 py-2 px-4 transition-colors">
+                                Ver lista completa
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <p class="text-sm">Esta playlist es una muestra representativa. Para escuchar la lista completa, puedes buscar "Clásicos del Rock Argentino" en tu plataforma de streaming favorita.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Galería visual -->
+        <section id="galeria" class="py-20 bg-rockGray/30 relative">
+            <div class="stage-light" style="top: 20%; left: 40%; background-color: rgba(255, 255, 255, 0.2);"></div>
+            
+            <div class="container mx-auto px-4">
+                <h2 class="font-stencil text-4xl mb-12 text-center">
+                    <span class="bg-rockRed px-4 py-1">GALERÍA VISUAL</span> 📸
+                </h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <!-- Recital -->
+                    <div class="gallery-item aspect-square bg-rockGray relative overflow-hidden">
+                        <img src="/fotos/velez.jpg" alt="Recital de Soda Stereo en Vélez" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+                            <div class="p-4 w-full">
+                                <p class="text-sm font-medium">Soda Stereo en Vélez, 1991</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Vinilo -->
+                    <div class="gallery-item aspect-square bg-rockGray relative overflow-hidden">
+                        <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="100" fill="#333"/>
+                            <circle cx="50" cy="50" r="40" fill="#111"/>
+                            <circle cx="50" cy="50" r="5" fill="#ddd"/>
+                            <circle cx="50" cy="50" r="38" fill="none" stroke="#444" stroke-width="0.5"/>
+                            <circle cx="50" cy="50" r="35" fill="none" stroke="#444" stroke-width="0.5"/>
+                            <circle cx="50" cy="50" r="30" fill="none" stroke="#444" stroke-width="0.5"/>
+                            <circle cx="50" cy="50" r="25" fill="none" stroke="#444" stroke-width="0.5"/>
+                            <circle cx="50" cy="50" r="20" fill="none" stroke="#444" stroke-width="0.5"/>
+                            <circle cx="50" cy="50" r="15" fill="none" stroke="#444" stroke-width="0.5"/>
+                            <circle cx="50" cy="50" r="10" fill="none" stroke="#444" stroke-width="0.5"/>
+                        </svg>
+                        <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+                            <div class="p-4 w-full">
+                                <p class="text-sm font-medium">Vinilo original de "Artaud"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Afiche -->
+                    <div class="gallery-item aspect-square bg-rockGray relative overflow-hidden">
+                        <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="100" fill="#e63946"/>
+                            <rect x="5" y="5" width="90" height="90" fill="#222"/>
+                            <text x="50" y="30" font-family="Arial" font-size="10" fill="white" text-anchor="middle">ROCK</text>
+                            <text x="50" y="50" font-family="Arial" font-size="8" fill="white" text-anchor="middle">FESTIVAL</text>
+                            <text x="50" y="70" font-family="Arial" font-size="6" fill="white" text-anchor="middle">1985</text>
+                        </svg>
+                        <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+                            <div class="p-4 w-full">
+                                <p class="text-sm font-medium">Afiche Festival B.A. Rock</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Revista -->
+                    <div class="gallery-item aspect-square bg-rockGray relative overflow-hidden">
+                        <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="100" fill="#ddd"/>
+                            <rect x="10" y="10" width="80" height="80" fill="#fff"/>
+                            <text x="50" y="30" font-family="Arial" font-size="8" fill="black" text-anchor="middle">REVISTA</text>
+                            <text x="50" y="50" font-family="Arial" font-size="10" fill="black" text-anchor="middle">ROCK</text>
+                            <circle cx="50" cy="70" r="10" fill="#e63946"/>
+                        </svg>
+                        <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+                            <div class="p-4 w-full">
+                                <p class="text-sm font-medium">Revista Pelo, 1983</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Remera -->
+                    <div class="gallery-item aspect-square bg-rockGray relative overflow-hidden">
+                        <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="100" fill="#444"/>
+                            <path d="M30,20 L70,20 L80,30 L70,40 L70,80 L30,80 L30,40 L20,30 Z" fill="#222"/>
+                            <text x="50" y="50" font-family="Arial" font-size="8" fill="white" text-anchor="middle">SODA</text>
+                        </svg>
+                        <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+                            <div class="p-4 w-full">
+                                <p class="text-sm font-medium">Remera vintage de Soda Stereo</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Entrada -->
+                    <div class="gallery-item aspect-square bg-rockGray relative overflow-hidden">
+                        <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="100" fill="#ddd"/>
+                            <rect x="5" y="20" width="90" height="60" fill="#fff"/>
+                            <text x="50" y="40" font-family="Arial" font-size="8" fill="black" text-anchor="middle">ENTRADA</text>
+                            <text x="50" y="60" font-family="Arial" font-size="6" fill="black" text-anchor="middle">OBRAS 1991</text>
+                            <line x1="5" y1="70" x2="95" y2="70" stroke="#000" stroke-width="1" stroke-dasharray="2,2"/>
+                        </svg>
+                        <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+                            <div class="p-4 w-full">
+                                <p class="text-sm font-medium">Entrada Spinetta en Obras</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Backstage -->
+                    <div class="gallery-item aspect-square bg-rockGray relative overflow-hidden">
+                        <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="100" fill="#222"/>
+                            <rect x="20" y="20" width="60" height="60" fill="#333"/>
+                            <circle cx="40" cy="40" r="10" fill="#ddd"/>
+                            <circle cx="60" cy="40" r="10" fill="#ddd"/>
+                            <rect x="30" y="60" width="40" height="10" fill="#ddd"/>
+                        </svg>
+                        <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+                            <div class="p-4 w-full">
+                                <p class="text-sm font-medium">Backstage Charly García</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Festival -->
+                    <div class="gallery-item aspect-square bg-rockGray relative overflow-hidden">
+                        <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="100" fill="#111"/>
+                            <rect x="0" y="60" width="100" height="40" fill="#000"/>
+                            <circle cx="20" cy="30" r="10" fill="#e63946" opacity="0.7"/>
+                            <circle cx="50" cy="20" r="15" fill="#e63946" opacity="0.5"/>
+                            <circle cx="80" cy="30" r="10" fill="#e63946" opacity="0.7"/>
+                            <rect x="10" y="60" width="5" height="20" fill="#333"/>
+                            <rect x="30" y="60" width="5" height="30" fill="#333"/>
+                            <rect x="50" y="60" width="5" height="25" fill="#333"/>
+                            <rect x="70" y="60" width="5" height="15" fill="#333"/>
+                            <rect x="90" y="60" width="5" height="20" fill="#333"/>
+                        </svg>
+                        <div class="absolute inset-0 bg-gradient-to-t from-rockDark to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+                            <div class="p-4 w-full">
+                                <p class="text-sm font-medium">Festival Cosquín Rock 2005</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button id="ver-mas-fotos" class="bg-rockRed hover:bg-rockRed/80 text-white font-stencil py-3 px-6 transition-colors">
+                        VER MÁS FOTOS
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-rockDark border-t border-rockRed py-12 relative overflow-hidden">
+        <div class="noise-bg opacity-10"></div>
+        <div class="stage-light" style="bottom: 20%; right: 10%; background-color: rgba(230, 57, 70, 0.2);"></div>
+        
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <div class="relative w-12 h-12 mr-3">
+                            <div class="absolute inset-0 bg-rockRed rounded-full vinyl-spin">
+                                <div class="vinyl-hole"></div>
+                                <div class="vinyl-grooves"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-stencil text-2xl">PASIÓN ROCKERA</h3>
+                            <p class="text-sm text-gray-400">Historia del Rock Argentino</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-white hover:text-rockRed transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-rockRed transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-rockRed transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-rockRed transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-rockGray pt-8">
+                <div class="flex flex-col md:flex-row justify-between">
+                    <div class="mb-6 md:mb-0">
+                        <h4 class="font-stencil text-lg mb-4">NAVEGACIÓN</h4>
+                        <ul class="grid grid-cols-2 gap-2">
+                            <li><a href="#historia" class="hover:text-rockRed transition-colors">Historia</a></li>
+                            <li><a href="#bandas" class="hover:text-rockRed transition-colors">Bandas y Solistas</a></li>
+                            <li><a href="#albumes" class="hover:text-rockRed transition-colors">Álbumes</a></li>
+                            <li><a href="#politica" class="hover:text-rockRed transition-colors">Rock y Política</a></li>
+                            <li><a href="#playlist" class="hover:text-rockRed transition-colors">Playlist</a></li>
+                            <li><a href="#galeria" class="hover:text-rockRed transition-colors">Galería</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-stencil text-lg mb-4">CONTACTO</h4>
+                        <p class="mb-2">info@pasionrockera.com.ar</p>
+                        <p>Buenos Aires, Argentina</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <div class="inline-block p-6 border-2 border-rockRed bg-black/50 backdrop-blur-sm">
+                        <p class="font-marker text-xl md:text-3xl italic text-white">
+                            "¡GRACIAS TOTALES!"
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center text-sm text-gray-500">
+                    <p>© 2023 Pasión Rockera. Todos los derechos reservados.</p>
+                    <p class="mt-2">Sitio creado por fanáticos del rock nacional argentino.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Menú móvil
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+        
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.textContent = message;
+            toast.className = 'fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-rockRed text-white px-6 py-3 rounded shadow-lg opacity-0 transition-opacity duration-300 z-50';
+            document.body.appendChild(toast);
+            requestAnimationFrame(() => {
+                toast.style.opacity = '1';
+            });
+            // Se oculta y elimina después de 3 segundos
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.addEventListener('transitionend', () => toast.remove());
+            }, 3000);
+        }
+        document.getElementById('ver-mas-artistas').addEventListener('click', () => {
+            showToast('Cargando más artistas...');
+        });
+        document.getElementById('ver-mas-albumes').addEventListener('click', () => {
+            showToast('Cargando más álbumes...');
+        });
+        document.getElementById('ver-mas-fotos').addEventListener('click', () => {
+            showToast('Cargando más fotos...');
+        });
+
+        function setLoading(button) {
+            button.disabled = true;
+            const spinner = document.createElement('span');
+            spinner.className = 'loader inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin ml-2';
+            button.appendChild(spinner);
+        }
+        function clearLoading(button) {
+            button.disabled = false;
+            const spinner = button.querySelector('.loader');
+            if(spinner) spinner.remove();
+        }
+
+document.getElementById('ver-mas-artistas').addEventListener('click', function() {
+  setLoading(this);
+  setTimeout(() => {
+    clearLoading(this);
+    showToast('Artistas cargados');
+  }, 2000);
+});
+
+        
+        // Animación de scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Efecto parallax en las luces de escenario
+        window.addEventListener('scroll', function() {
+            const lights = document.querySelectorAll('.stage-light');
+            const scrollPosition = window.scrollY;
+            
+            lights.forEach(light => {
+                const speed = 0.05;
+                const yPos = -scrollPosition * speed;
+                light.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+        
+        // Animación de entrada para elementos al hacer scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeIn');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('section > div > h2, .timeline-item, .artist-card, .album-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+        
+        // Clase para la animación
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                .animate-fadeIn {
+                    opacity: 1 !important;
+                    transform: translateY(0) !important;
+                }
+            </style>
+        `);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'962e01f2f6087f2d',t:'MTc1MzEzNTYwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
