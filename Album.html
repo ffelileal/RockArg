@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasión Rockera: Más Álbumes del Rock Argentino</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Staatliches&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/icono.svg" type="image/svg+xml">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rockRed: '#e63946',
+                        rockDark: '#121212',
+                        rockGray: '#333333',
+                    },
+                    fontFamily: {
+                        stencil: ['Staatliches', 'sans-serif'],
+                        typewriter: ['Special Elite', 'monospace'],
+                        marker: ['Permanent Marker', 'cursive'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'flicker': 'flicker 2s infinite alternate',
+                        'fadeIn': 'fadeIn 1s ease-in forwards',
+                        'slideUp': 'slideUp 0.8s ease-out forwards'
+                    },
+                    keyframes: {
+                        flicker: {
+                            '0%, 18%, 22%, 25%, 53%, 57%, 100%': { opacity: 1 },
+                            '20%, 24%, 55%': { opacity: 0.5 },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: 0 },
+                            '100%': { opacity: 1 }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: 0 },
+                            '100%': { transform: 'translateY(0)', opacity: 1 }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+            overflow-x: hidden;
+            font-family: 'Special Elite', monospace;
+        }
+        
+        .vinyl-spin {
+            animation: spin 10s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .stage-light {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            filter: blur(30px);
+            opacity: 0.6;
+            z-index: 0;
+            animation: flicker 3s infinite alternate;
+        }
+        
+        .album-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+        }
+        
+        .album-card.visible {
+            animation: fadeIn 0.8s ease-out forwards, slideUp 0.8s ease-out forwards;
+        }
+        
+        .album-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.7);
+        }
+        
+        .vinyl-hole {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #121212;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0.05;
+        }
+        
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #e63946;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b52b35;
+        }
+    </style>
+</head>
+<body class="font-typewriter">
+    <div class="noise-bg"></div>
+    
+    <!-- Luces de escenario -->
+    <div class="stage-light" style="top: 20%; left: 10%; background-color: rgba(230, 57, 70, 0.5);"></div>
+    <div class="stage-light" style="top: 60%; left: 80%; background-color: rgba(230, 57, 70, 0.5);"></div>
+    <div class="stage-light" style="top: 30%; left: 70%; background-color: rgba(255, 255, 255, 0.3);"></div>
+    
+    <!-- Navegación -->
+    <nav class="sticky top-0 bg-rockDark border-b border-rockRed z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap items-center justify-between py-4">
+                <div class="flex items-center">
+                    <div class="relative w-10 h-10 mr-3">
+                        <div class="absolute inset-0 bg-rockRed rounded-full vinyl-spin">
+                            <div class="vinyl-hole"></div>
+                        </div>
+                    </div>
+                    <a href="Inicio.html" class="hover:underline hover:text-rockRed transition-colors duration-200">
+                        <span class="font-stencil text-xl">PASIÓN ROCKERA</span>
+                    </a>
+                </div>
+                
+                <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                
+                <div id="menu" class="hidden md:flex w-full md:w-auto mt-4 md:mt-0">
+                    <ul class="flex flex-col md:flex-row md:space-x-6">
+                        <li><a href="Inicio.html" class="block py-2 hover:text-rockRed transition-colors">Inicio</a></li>
+                        <li><a href="Inicio.html#historia" class="block py-2 hover:text-rockRed transition-colors">Historia</a></li>
+                        <li><a href="Inicio.html#bandas" class="block py-2 hover:text-rockRed transition-colors">Artistas</a></li>
+                        <li><a href="Album.html" class="block py-2 text-rockRed transition-colors">Álbumes</a></li>
+                        <li><a href="Inicio.html#galeria" class="block py-2 hover:text-rockRed transition-colors">Galería</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Header -->
+    <header class="relative py-20 bg-rockDark text-center overflow-hidden">
+        <div class="container mx-auto px-4 z-20">
+            <h1 class="font-stencil text-4xl md:text-6xl mb-6 animate-fadeIn">
+                <span class="text-white">MÁS </span><span class="text-rockRed">ÁLBUMES</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-lg animate-fadeIn" style="animation-delay: 0.3s">Los discos esenciales que definieron el rock argentino</p>
+        </div>
+    </header>
+    
+    <!-- Contenido principal -->
+    <main class="relative z-10 pb-20">
+        
+        <div class="container mx-auto px-4">
+            <!-- Grid de álbumes -->
+            <div class="album-grid">
+                <!-- Artaud -->
+                <div class="album-card bg-rockDark border border-rockRed/50 rounded-xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform" onclick="openModal('artaudModal')">
+                    <div class="relative">
+                        <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <img src="./assets/fotos/albumnes/PescadoRabioso-Artaud.png" alt="Portada del álbum Artaud" class="w-full h-full object-cover">
+                            </a>
+                        </div>
+                        <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                            1973
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-stencil text-xl mb-1">ARTAUD</h3>
+                        <p class="text-sm mb-3">Luis Alberto Spinetta</p>
+                        <p class="text-sm italic">"Todas las hojas son del viento, hasta que caen..."</p>
+                    </div>
+                </div>
+                <div id="artaudModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                            <button onclick="closeModal('artaudModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                            <h3 class="text-3xl font-stencil text-rockRed mb-3">ARTAUD</h3>
+                            <p class="text-sm text-gray-300 mb-2 font-semibold">Luis Alberto Spinetta • 1973</p>
+                            <p class="text-sm mb-4 text-gray-400 italic"">"Todas las hojas son del viento, hasta que caen..."</p>
+                            <p class="text-sm text-gray-300 mb-4">
+                                "Artaud" es una obra fundamental del rock argentino. Inspirado en el poeta Antonin Artaud, el álbum explora la sensibilidad humana, la libertad y el arte como forma de resistencia. Su sonido intimista, poético y experimental convirtió a Spinetta en un referente ineludible de la música en español.
+                            </p>
+                            <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                                <p class="font-bold text-rockRed mb-2">TRACKLIST</p>                              
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                                    <li>Todas las Hojas Son del Viento</li>
+                                    <li>Cementerio Club</li>
+                                    <li>Por</li>
+                                    <li>Superchería</li>
+                                    <li>La Sed Verdadera</li>
+                                    <li>Cantanta de Puentes Amarillos</li>
+                                    <li>Bajan</li>
+                                    <li>A Starosta, el Idiota</li>
+                                    <li>Las Habladurias Del Mundo</li>
+                                    </ul>
+                            </div>
+                            <a href="https://open.spotify.com/intl-es/album/5MJR9j21vjEi4ODxzhvoTA?si=bd65eabc54664002" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                                🎧 Escuchar en Spotify
+                            </a>
+                        </div>
+                    </div>
+                
+                <!-- Clics Modernos -->
+                        <div class="album-card bg-rockDark border border-rockRed/50 rounded-xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform" onclick="openModal('clicsModal')">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                               <img src="./assets/fotos/albumnes/Clic.jpeg"  alt="Clics Modernos" class="w-full h-full object-cover"/>
+                               </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1983
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">CLICS MODERNOS</h3>
+                            <p class="text-sm mb-3">Charly García</p>
+                            <p class="text-sm italic">"Nos siguen pegando abajo..."</p>
+                        </div>
+                    </div>
+                    <div id="clicsModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                            <button onclick="closeModal('clicsModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                            <h3 class="text-3xl font-stencil text-rockRed mb-3">CLICS MODERNOS</h3>
+                            <p class="text-sm text-gray-300 mb-2 font-semibold">Charly García • 1983</p>
+                            <p class="text-sm mb-4 text-gray-400 italic"">"Nos siguen pegando abajo..."</p>
+                            <p class="text-sm text-gray-300 mb-4">
+                                Este álbum marcó un antes y un después en la historia del rock en español. Con una energía potente y letras profundas, Soda Stereo exploró el deseo, la libertad y lo salvaje del alma.
+                            </p>
+                            <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                                <p class="font-bold text-rockRed mb-2">TRACKLIST</p>                              
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                                    <li>Nos Siguen Peganfo Abajo</li>
+                                    <li>No Soy Un Extraño</li>
+                                    <li>Dos Cero Uno</li>
+                                    <li>Nuevos Trapos</li>
+                                    <li>Bancate Ese Defecto</li>
+                                    <li>No Me Dejan Salir</li>
+                                    <li>Los Dinosaurios</li>
+                                    <li>Plateado Sobre Plateado (Huellas En El Mar)</li>
+                                    <li>Ojos De Video Tape</li>
+                                    </ul>
+                            </div>
+                            <a href="https://open.spotify.com/intl-es/album/3OyBf97NOuJjhEpQHY920H?si=aadc59c64318481b" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                                🎧 Escuchar en Spotify
+                            </a>
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- Canción Animal -->
+                     <div class="album-card bg-rockDark border border-rockRed/50 rounded-xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform" onclick="openModal('cancionAnimalModal')">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <img src="./assets/fotos/albumnes/CancionAnimal.jpeg" alt="Canción Animal" class="w-full h-full object-cover"/>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2 rounded">
+                                1990
+                            </div>
+                        </div>
+                        <div class="p-4 text-white">
+                            <h3 class="font-stencil text-xl mb-1 text-rockRed">CANCIÓN ANIMAL</h3>
+                            <p class="text-sm text-gray-300">Soda Stereo</p>
+                            <p class="text-sm italic text-gray-400">"Un millón de años luz de casa..."</p>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                     <div id="cancionAnimalModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                            <button onclick="closeModal('cancionAnimalModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                            <h3 class="text-3xl font-stencil text-rockRed mb-3">CANCIÓN ANIMAL</h3>
+                            <p class="text-sm text-gray-300 mb-2 font-semibold">Soda Stereo • 1990</p>
+                            <p class="text-sm mb-4 text-gray-400 italic">"Un millón de años luz de casa..."</p>
+                            <p class="text-sm text-gray-300 mb-4">
+                                Este álbum marcó un antes y un después en la historia del rock en español. Con una energía potente y letras profundas, Soda Stereo exploró el deseo, la libertad y lo salvaje del alma.
+                            </p>
+                            <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                                <p class="font-bold text-rockRed mb-2">CANCIÓN ANIMAL</p>                              
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                                    <li>(en)El Séptimo Día</li>
+                                    <li>Un millón de años luz</li>
+                                    <li>Canción Animal</li>
+                                    <li>1990 (Mil Nueve Noventa)</li>
+                                    <li>Sueles Dejarme Solo</li>
+                                    <li>De Música Ligera</li>
+                                    <li>Hombre Al Agua</li>
+                                    <li>Té Para 3</li>
+                                    <li>Entre caníbales</li>
+                                    <li>Cae El Sol</li>
+                                    </ul>
+                            </div>
+                            
+                            <a href="https://open.spotify.com/intl-es/album/3GoSlKTNcVOp1ZxE5OOXeN?si=0876d70ec9354049" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                                🎧 Escuchar en Spotify
+                            </a>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Oktubre -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 rounded-xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform" onclick="openModal('oktubreModal')">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                               <img src="./assets/fotos/albumnes/oktubre.jpeg"  alt="Oktubre" class="w-full h-full object-cover"/>
+                               </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1986
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">OKTUBRE</h3>
+                            <p class="text-sm mb-3">Patricio Rey y sus Redonditos de Ricota</p>
+                            <p class="text-sm italic">"Ji ji ji, se va a acabar, se va a acabar la dictadura del macho..."</p>
+                        </div>
+                    </div>
+                    <div id="oktubreModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                            <button onclick="closeModal('oktubreModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                            <h3 class="text-3xl font-stencil text-rockRed mb-3">OKTUBRE</h3>
+                            <p class="text-sm text-gray-300 mb-2 font-semibold">Patricio Rey y sus Redonditos de Ricota • 1986</p>
+                            <p class="text-sm mb-4 text-gray-400 italic">"Ella debe estar cansada de andar siempre en la ciudad..."</p>
+                            <p class="text-sm text-gray-300 mb-4">
+                                "Oktubre" es una obra de culto del rock nacional. Con una lírica críptica y una sonoridad oscura, los Redondos consolidaron un mensaje contracultural que resonó con toda una generación. Su influencia permanece intacta hasta hoy.
+                            </p>
+                            <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                                <p class="font-bold text-rockRed mb-2">TRACKLIST</p>
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                                    <li>Fuegos de octubre</li>
+                                    <li>Preso en mi ciudad</li>
+                                    <li>Música para pastillas</li>
+                                    <li>Semen-up</li>
+                                    <li>Divina TV. Führer</li>
+                                    <li>Motor psico</li>
+                                    <li>Ji Ji Ji</li>
+                                    <li>Canción para Naufragios</li>
+                                    <li>Ya Nadie Va a Escuchar Tu Remera</li>
+                                </ul>
+                            </div>
+                            <a href="https://open.spotify.com/intl-es/album/0TmPRZoau8M0QIfnMgwrlI?si=aeead4b20da34929" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                                🎧 Escuchar en Spotify
+                            </a>
+                        </div>
+                    </div>
+
+                    
+                    <!-- El Amor Después del Amor -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 rounded-xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform" onclick="openModal('amorModal')">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                               <img src="./assets/fotos/albumnes/elamor.jpg"  alt="el Amor despues del amor" class="w-full h-full object-cover"/>
+                               </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1992
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">EL AMOR DESPUÉS DEL AMOR</h3>
+                            <p class="text-sm mb-3">Fito Páez</p>
+                            <p class="text-sm italic">"Quién dijo que todo está perdido, yo vengo a ofrecer mi corazón..."</p>
+                        </div>
+                    </div>
+                    <div id="amorModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                            <button onclick="closeModal('amorModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                            <h3 class="text-3xl font-stencil text-rockRed mb-3">EL AMOR DESPUÉS DEL AMOR</h3>
+                            <p class="text-sm text-gray-300 mb-2 font-semibold">Fito Páez • 1992</p>
+                            <p class="text-sm mb-4 text-gray-400 italic">"El amor después del amor tal vez, se parezca a este rayo de sol..."</p>
+                            <p class="text-sm text-gray-300 mb-4">
+                                Este álbum es uno de los más vendidos de la historia del rock argentino. Fito Páez canaliza emociones intensas a través de una instrumentación rica y letras inolvidables, definiendo una época para la música latinoamericana.
+                            </p>
+                            <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                                <p class="font-bold text-rockRed mb-2">TRACKLIST</p>
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                                    <li>El amor después del amor</li>
+                                    <li>Dos días en la vida</li>
+                                    <li>La Verónica</li>
+                                    <li>Tráfico por Katmandú</li>
+                                    <li>Pétalo de sal</li>
+                                    <li>Sasha, Sissí y el Círculo de Baba</li>
+                                    <li>Un vestido y un amor</li>
+                                    <li>Tumbas de la gloria</li>
+                                    <li>La rueda mágica</li>
+                                    <li>A rodar mi vida</li>
+                                </ul>
+                            </div>
+                            <a href="https://open.spotify.com/intl-es/track/1PQzZbitOJ6XPFg7FFzsKQ?si=85713d0d2a23416b" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                                🎧 Escuchar en Spotify
+                            </a>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Bocanada -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 rounded-xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform" onclick="openModal('bocanadaModal')">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                
+                               <img src="./assets/fotos/albumnes/bocanada.jpeg"  alt="Bocanada" class="w-full h-full object-cover"/>
+                               </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1999
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">BOCANADA</h3>
+                            <p class="text-sm mb-3">Gustavo Cerati</p>
+                            <p class="text-sm italic">"Puedo ver a través, la pared de tu piel..."</p>
+                        </div>
+                    </div>
+                    <div id="bocanadaModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                            <button onclick="closeModal('bocanadaModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                            <h3 class="text-3xl font-stencil text-rockRed mb-3">BOCANADA</h3>
+                            <p class="text-sm text-gray-300 mb-2 font-semibold">Gustavo Cerati • 1999</p>
+                            <p class="text-sm mb-4 text-gray-400 italic">"No hay nadie alrededor, no hay nadie..."</p>
+                            <p class="text-sm text-gray-300 mb-4">
+                                "Bocanada" marca el inicio de la carrera solista de Cerati tras Soda Stereo. Fusiona rock, electrónica y poesía, creando un universo sonoro envolvente y personal, considerado una obra maestra por crítica y fans.
+                            </p>
+                            <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                                <p class="font-bold text-rockRed mb-2">TRACKLIST</p>
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                                    <li>Tabú</li>
+                                    <li>Engaña</li>
+                                    <li>Bocanada</li>
+                                    <li>Puente</li>
+                                    <li>Río Babel</li>
+                                    <li>Beautiful</li>
+                                    <li>Perdonar es divino</li>
+                                    <li>Verbo carne</li>
+                                    <li>Raiz</li>
+                                    <li>Y Si El Humo Esta En Foco...</li>
+                                    <li>Paseo inmoral</li>
+                                    <li>Aqui & Ahora (Y Despues)</li>
+                                    <li>Alma</li>
+                                    <li>Balsa</li>                                                        
+                                </ul>
+                            </div>
+                            <a href="https://open.spotify.com/intl-es/album/2rIdWbXPjcq8K7BCccBhhC?si=4e5fb0df31804703" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                                🎧 Escuchar en Spotify
+                            </a>
+                        </div>
+                    </div>
+
+                     <!-- Los Abuelos de la Nada -->
+                      <div class="album-card bg-rockDark border border-rockRed/50 rounded-xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform" onclick="openModal('abuelosModal')">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                    <img src="./assets/fotos/albumnes/abuelos.jpeg" alt="Los Abuelos de la Nada" class="w-full h-full object-cover"/>
+                                </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                1982
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">LOS ABUELOS DE LA NADA</h3>
+                            <p class="text-sm mb-3">Los Abuelos de la Nada</p>
+                            <p class="text-sm italic">"Mil horas y un par de fantasmas..."</p>
+                        </div>
+                    </div>
+                    <div id="abuelosModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                            <button onclick="closeModal('abuelosModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                            <h3 class="text-3xl font-stencil text-rockRed mb-3">LOS ABUELOS DE LA NADA</h3>
+                            <p class="text-sm text-gray-300 mb-2 font-semibold">Los Abuelos de la Nada • 1982</p>
+                            <p class="text-sm mb-4 text-gray-400 italic">"Mil horas y un par de fantasmas..."</p>
+                            <p class="text-sm text-gray-300 mb-4">
+                                Debut fundamental del grupo liderado por Miguel Abuelo y Andrés Calamaro. Un álbum fresco, urbano y emocional, que capturó el espíritu de los 80 con letras simples y potentes.
+                            </p>
+                            <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                                <p class="font-bold text-rockRed mb-2">TRACKLIST</p>
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                                    <li>No te enamores nunca de aquel marinero bengalí</li>
+                                    <li>Mil Horas</li>
+                                    <li>Lunes Por La Madrugada</li>
+                                    <li>Sintonía Americana</li>
+                                    <li>Así es el Calor</li>
+                                    <li>Vamos Al Ruedo</li>
+                                    <li>Costumbres Argentinas</li>
+                                    <li>Yo Soy Tu Bandera</li>
+                                    <li>No Se Desesperen</li>
+                                    <li>Himno De Mí Corazón</li>
+                                    <li>Se Me Olvidó Que Te Olvidé</li>
+                                    
+                                </ul>
+                        </div>
+                        <a href="https://open.spotify.com/album/6IwPxvK4pVWKt6HBCmXh8h?si=7DiYOiJ8SZSQYE3EZtyBAg" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                            🎧 Escuchar en Spotify
+                        </a>
+                    </div>
+                </div>
+                    <!-- La vela Puerca - A Contraluz -->
+
+                     <div class="album-card bg-rockDark border border-rockRed/50 rounded-xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform" onclick="openModal('contraluzModal')">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                
+                                    <img src="./assets/fotos/albumnes/contraluz.jpeg" alt="A Contraluz" class="w-full h-full object-cover"/>
+                                </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                2004
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">A CONTRALUZ</h3>
+                            <p class="text-sm mb-3">La Vela Puerca</p>
+                             <p class="text-sm italic">"Y sigo, sigo igual..."</p>
+                        </div>
+
+                    </div>
+                    <div id="contraluzModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                            <button onclick="closeModal('contraluzModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                            <h3 class="text-3xl font-stencil text-rockRed mb-3">A CONTRALUZ</h3>
+                            <p class="text-sm text-gray-300 mb-2 font-semibold">La Vela Puerca • 2004</p>
+                            <p class="text-sm mb-4 text-gray-400 italic">"Y sigo, sigo igual..."</p>
+                            <p class="text-sm text-gray-300 mb-4">
+                                Este álbum reafirma a La Vela Puerca como una de las bandas referentes del rock rioplatense, con letras introspectivas y potentes, acompañadas de una energía cruda y contagiosa.
+                            </p>
+                            <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                                <p class="font-bold text-rockRed mb-2">TRACKLIST</p>
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                                    <li>Llenos de magia</li>
+                                    <li>Sin palabras</li>
+                                    <li>Dice</li>
+                                    <li>De atar</li>
+                                    <li>Va a Escampar</li>
+                                    <li>Escobas</li>
+                                    <li>Clarobscuro</li>
+                                    <li>Zafar</li>
+                                    <li>Caldo Precoz</li>
+                                    <li>Haciendo Pasar Por Luz</li>
+                                    <li>En El Limbo</li>
+                                    <li>Un Frasco</li>
+                                    <li>Doble Filo</li>                                   
+                                    <li>A Lo Verde</li>
+                                </ul>
+                            </div>
+                            <a href="https://open.spotify.com/intl-es/album/7LMidzEe6utRLx7hPiq2AL?si=4osh7vqVTPWh9yhIZJ_aPQ" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                                🎧 Escuchar en Spotify
+                            </a>
+                        </div>
+                    </div>
+                    
+
+                    <!-- Señales - Callejeros -->
+                    <div class="album-card bg-rockDark border border-rockRed/50 rounded-xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform" onclick="openModal('senalesModal')">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                    <img src="./assets/fotos/albumnes/senales.webp" alt="Señales" class="w-full h-full object-cover"/>
+                                </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                2003
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">SEÑALES</h3>
+                            <p class="text-sm mb-3">Callejeros</p>
+                            <p class="text-sm italic">"Una nueva noche fría en el barrio..."</p>
+                        </div>
+                    </div>
+                    <div id="senalesModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                            <button onclick="closeModal('senalesModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                            <h3 class="text-3xl font-stencil text-rockRed mb-3">SEÑALES</h3>
+                            <p class="text-sm text-gray-300 mb-2 font-semibold">Callejeros • 2003</p>
+                            <p class="text-sm mb-4 text-gray-400 italic">"Una nueva noche fría en el barrio..."</p>
+                            <p class="text-sm text-gray-300 mb-4">
+                                "Señales" retrata la crudeza y esperanza de la vida urbana. Callejeros despliega letras sociales, viscerales y melancólicas, acompañadas por una fusión entre rock barrial y sensibilidad popular.
+                            </p>
+                            <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                                <p class="font-bold text-rockRed mb-2">TRACKLIST</p>
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                                    <li>Daños</li>
+                                    <li>Puede</li>
+                                    <li>Límites</li>
+                                    <li>Creo</li>
+                                    <li>Frente al Río</li>
+                                    <li>Sin Paciencia</li>
+                                    <li>Día a Día</li>
+                                    <li>Sueño</li>
+                                    <li>Hoy</li>
+                                    <li>9 de Julio</li>
+                                    <li>Señales</li>
+                                    <li>Desencuentro</li>
+                                </ul>
+                            </div>
+                                <a href="https://open.spotify.com/intl-es/album/573TG9cHInMww2QgBeKqTy?si=cDhlJz50QFudmB7jSym6tA" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                                     🎧 Escuchar en Spotify
+                                </a>
+                         </div>
+                        </div>
+
+                     <!-- Crisis - Las Pastillas del Abuelo -->
+                      <div class="album-card bg-rockDark border border-rockRed/50 rounded-xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform" onclick="openModal('crisisModal')">
+                        <div class="relative">
+                            <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <a href="https://open.spotify.com/intl-es/album/6VW6vrsXtRe6IFPjJULhXo?si=RIG3EZWXRgGlO397wEVcqQ" target="_blank" rel="noopener noreferrer">
+                                    <img src="./assets/fotos/albumnes/crisis.jpg" alt="Crisis" class="w-full h-full object-cover"/>
+                                </a>
+                            </div>
+                            <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                                2008
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-stencil text-xl mb-1">CRISIS</h3>
+                            <p class="text-sm mb-3">Las Pastillas del Abuelo</p>
+                            <p class="text-sm italic">"No somos culpables de vivir..."</p>
+                        </div>
+                    </div>
+                    <div id="crisisModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                        <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                            <button onclick="closeModal('crisisModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                            <h3 class="text-3xl font-stencil text-rockRed mb-3">CRISIS</h3>
+                            <p class="text-sm text-gray-300 mb-2 font-semibold">Las Pastillas del Abuelo • 2008</p>
+                            <p class="text-sm mb-4 text-gray-400 italic">"No somos culpables de vivir..."</p>
+                            <p class="text-sm text-gray-300 mb-4">
+                                "Crisis" es una obra cargada de reflexión social, crítica política y emociones personales. Las Pastillas del Abuelo combinan rock, reggae y tango con una lírica fuerte e inteligente.
+                            </p>
+                        <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                            <p class="font-bold text-rockRed mb-2">TRACKLIST</p>
+                            <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                                <li>¿De dónde vengo?</li>
+                                <li>¿Hacia donde voy?</li>
+                                <li>¿Casualidad o causalidad?</li>
+                                <li>¿Qué carajo es el amor?</li>
+                                <li>¿Quiero tener la razon o ser feliz?</li>
+                                <li>¿Qué Vicios tengo?</li>
+                                <li>¿Dónde esconder tantas manos?</li>
+                                <li>Cómo puedo entrar en mi?</li>
+                                <li>¿viviré a conciencia esta lección?</li>
+                                <li>¿Qué es Dios?</li>
+                                <li>¿Qué hago esperando un puto Ass?</li>
+                                <li>¿Me juego el corazón?</li>
+                                <li>¿Qué Pretendo no saber?</li>
+                                <li>Duda</li>
+                                <li>Maldito Y Cortamambo</li>
+                                
+                            </ul>
+                        </div>
+                        <a href="https://open.spotify.com/intl-es/album/6VW6vrsXtRe6IFPjJULhXo?si=ws0tNR1UQsm_yGyLajWNHQ" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                            🎧 Escuchar en spotify
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mentira La Verdad -->
+                <div class="album-card bg-rockDark border border-rockRed/50 rounded-xl shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform" onclick="openModal('airbagModal')">
+                    <div class="relative">
+                        <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <img src="/assets/fotos/albumnes/mentira.jpeg" alt="Mentira" class="w-full h-full object-cover">
+                            </a>
+                        </div>
+                        <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                            1992
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-stencil text-xl mb-1">MENTIRA LA VERDAD</h3>
+                        <p class="text-sm mb-3">Airbag</p>
+                        <p class="text-sm italic">"Todo lo que das, de alguna forma vuelve"</p>
+                    </div>
+                </div>
+                <div id="airbagModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                    <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                        <button onclick="closeModal('airbagModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                        <h3 class="text-3xl font-stencil text-rockRed mb-3">MENTIRA LA VERDAD</h3><p class="text-sm text-gray-300 mb-2 font-semibold">Airbag • 2016</p>
+                        <p class="text-sm mb-4 text-gray-400 italic">"Todo lo que das, de alguna forma vuelve..."</p>
+                        <p class="text-sm text-gray-300 mb-4">
+                            Con una producción potente y letras introspectivas, este álbum consolida a Airbag como una banda de rock maduro, lleno de solos de guitarra, melodías épicas y emociones viscerales.
+                        </p>
+                        <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                            <p class="font-bold text-rockRed mb-2">TRACKLIST</p>
+                            <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                                <li>Huracán</li>
+                                <li>Vivamos el Momento</li>
+                                <li>Colombiana</li>
+                                <li>Gran Encuentro</li>
+                                <li>Relámpago</li>
+                                <li>Culpables</li>
+                                <li>Cicatrices</li>
+                                <li>Primavera 2001</li>
+                                <li>Tu Banda</li>
+                                <li>Apocalipsis Confort</li>
+                                <li>Mentira la Verdad</li>
+                            </ul>
+                        </div>
+                            <a href="https://open.spotify.com/intl-es/album/6MYRm0FnvxfQVxc2U6IVPA?si=FO5QCuQgRvWCjKTQde2iIg" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                                🎧 Escuchar en Spotify
+                            </a>
+                        </div>
+                    </div>
+                
+                <!-- INFAME -->
+                <div class="album-card bg-rockDark border border-rockRed/50 overflow-hidden">
+                    <div class="relative">
+                        <div class="album-cover aspect-square bg-rockGray relative overflow-hidden">
+                                <img src="/assets/fotos/albumnes/infame.jpg" alt="Supermercados" class="w-full h-full object-cover">
+                            </a>
+                        </div>
+                        <div class="absolute top-3 right-3 bg-rockRed text-white text-xs py-1 px-2">
+                            1999
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-stencil text-xl mb-1">INFAME</h3>
+                        <p class="text-sm mb-3">Babasónicos</p>
+                        <p class="text-sm italic">"Puesto, estoy puesto para vos"</p>
+                    </div>
+                </div>
+            </div>
+            <div id="supermercadosModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden">
+                <div class="bg-rockDark text-white max-w-xl w-full p-6 rounded-lg relative border border-rockRed/60 shadow-lg">
+                    <button onclick="closeModal('supermercadosModal')" class="absolute top-2 right-2 text-white hover:text-rockRed text-2xl">&times;</button>
+                    <h3 class="text-3xl font-stencil text-rockRed mb-3">INFAME</h3>
+                    <p class="text-sm text-gray-300 mb-2 font-semibold">Babasónicos • 2003</p>
+                    <p class="text-sm mb-4 text-gray-400 italic">"Puesto, estoy puesto para vos..."</p>
+                    <p class="text-sm text-gray-300 mb-4">
+                            "Infame" es uno de los discos más emblemáticos de Babasónicos, destacando por su sonido experimental y provocador que mezcla rock, electrónica y pop alternativo. El álbum explora temáticas oscuras y transgresoras, consolidando a la banda como un referente del rock alternativo argentino.
+                    </p>
+                    <div class="bg-rockGray/20 p-5 rounded-md mb-6 border-l-4 border-rockRed">
+                        <p class="font-bold text-rockRed mb-2">TRACKLIST</p>
+                        <ul class="list-disc list-inside text-sm text-gray-300 space-y-1 max-h-48 overflow-y-auto">
+                            <li>Irresponsables</li>
+                            <li>Risa</li>
+                            <li>Pistero</li>
+                            <li>Estertor</li>
+                            <li>Putita</li>
+                            <li>Saturno</li>
+                            <li>Sin mi diablo Vixen</li>
+                            <li>Curtis</li>
+                            <li>Y qué</li>
+                            <li>La Puntita</li>
+                            <li>Fan de Scorpions</li>
+                            <li>Gratis</li>
+                            <li>Once</li>
+                        </ul>
+                    </div>
+                    <a href="https://open.spotify.com/album/7FYLw9fTOiYnJFbFk2Mntn?si=zWA3avuRSOitJHCHs1hNKQ" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-rockRed hover:bg-red-700 transition px-4 py-2 rounded text-sm font-semibold text-white">
+                        🎧 Escuchar en Spotify
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="Inicio.html" class="inline-flex items-center text-rockRed hover:text-white font-stencil transition-colors">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    VOLVER AL INICIO
+                </a>
+            </div>
+        </div>
+        
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-rockDark border-t border-rockRed py-12 relative overflow-hidden">
+        <div class="noise-bg opacity-10"></div>
+        <div class="stage-light" style="bottom: 20%; right: 10%; background-color: rgba(230, 57, 70, 0.2);"></div>
+        
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <div class="relative w-12 h-12 mr-3">
+                            <div class="absolute inset-0 bg-rockRed rounded-full vinyl-spin">
+                                <div class="vinyl-hole"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-stencil text-2xl">PASIÓN ROCKERA</h3>
+                            <p class="text-sm text-gray-400">Historia del Rock Argentino</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="https://www.instagram.com/ffeli.leal" target="_blank" class="text-white hover:text-rockRed transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/FfeliLeal" target="_blank" class="text-white hover:text-rockRed transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                        </svg>
+                    </a>
+                    <a href="https://open.spotify.com/user/feligraphs" target="_blank" class="text-white hover:text-green-500 transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.373 0 0 5.373 0 12c0 6.628 5.373 12 12 12s12-5.372 12-12c0-6.627-5.373-12-12-12zm5.363 17.421a.75.75 0 0 1-1.033.27c-2.833-1.704-6.396-2.087-10.617-1.139a.75.75 0 0 1-.336-1.462c4.683-1.074 8.708-.638 11.886 1.257a.75.75 0 0 1 .27 1.074zm1.473-3.072a.937.937 0 0 1-1.29.336c-3.24-1.957-8.182-2.521-12.011-1.378a.937.937 0 0 1-.537-1.795c4.335-1.296 9.89-.674 13.575 1.577a.937.937 0 0 1 .263 1.26zm.135-3.302c-3.841-2.285-10.21-2.49-13.9-1.36a1.124 1.124 0 1 1-.656-2.149c4.3-1.313 11.323-1.077 15.616 1.59a1.124 1.124 0 0 1-1.06 1.919z"/>
+                        </svg>
+                    </a>
+
+                </div>
+            </div>
+            
+            <div class="border-t border-rockGray pt-8">
+                <div class="flex flex-col md:flex-row justify-between">
+                    <div class="mb-6 md:mb-0">
+                        <h4 class="font-stencil text-lg mb-4">NAVEGACIÓN</h4>
+                        <ul class="grid grid-cols-2 gap-2">
+                            <li><a href="Inicio.html#historia" class="hover:text-rockRed transition-colors">Historia</a></li>
+                            <li><a href="Inicio.html#bandas" class="hover:text-rockRed transition-colors">Artistas</a></li>
+                            <li><a href="mas-albumes.html" class="hover:text-rockRed transition-colors">Álbumes</a></li>
+                            <li><a href="Inicio.html#politica" class="hover:text-rockRed transition-colors">Rock y Política</a></li>
+                            <li><a href="Inicio.html#playlist" class="hover:text-rockRed transition-colors">Playlist</a></li>
+                            <li><a href="Inicio.html#galeria" class="hover:text-rockRed transition-colors">Galería</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-stencil text-lg mb-4">CONTACTO</h4>
+                        <p class="mb-2">felileal25@gmail.com</p>
+                        <p>Córdoba, Argentina</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <div class="inline-block p-6 border-2 border-rockRed bg-black/50 backdrop-blur-sm">
+                        <p class="font-marker text-xl md:text-3xl italic text-white">
+                            "¡GRACIAS TOTALES!"
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center text-sm text-gray-500">
+                    <p>© 2025 Pasión Rockera. Todos los derechos reservados.</p>
+                    <p class="mt-2">Sitio creado por un fanático del rock nacional argentino.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Menú móvil
+        const menuToggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('menu');
+        
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+        
+        // Animación de scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Efecto parallax en las luces de escenario
+        window.addEventListener('scroll', function() {
+            const lights = document.querySelectorAll('.stage-light');
+            const scrollPosition = window.scrollY;
+            
+            lights.forEach(light => {
+                const speed = 0.05;
+                const yPos = -scrollPosition * speed;
+                light.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+        
+        // Animación de aparición secuencial de los álbumes
+        document.addEventListener('DOMContentLoaded', () => {
+            const albumCards = document.querySelectorAll('.album-card');
+            
+            // Función para verificar si un elemento está en el viewport
+            const isInViewport = (element) => {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            };
+            
+            // Función para manejar el scroll
+           const handleScroll = () => {
+            albumCards.forEach((card, index) => {
+            if (isInViewport(card)) {  // Paréntesis corregido aquí
+                // Aplicamos un delay progresivo para crear el efecto cascada
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, index * 100); // 100ms de diferencia entre cada uno
+            }
+        });
+    };
+            
+            // Llamamos a la función al cargar y al hacer scroll
+            handleScroll();
+            window.addEventListener('scroll', handleScroll);
+        });
+        function openModal(id) {
+  document.getElementById(id).classList.remove('hidden');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.add('hidden');
+}
+
+    </script>
+</body>
+</html>
